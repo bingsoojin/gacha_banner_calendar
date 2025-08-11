@@ -1,0 +1,15 @@
+{
+  "name": "banner-cal-auto",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node src/build.js",
+    "start": "node src/build.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "luxon": "^3.5.0",
+    "node-fetch": "^3.3.2"
+  }
+}

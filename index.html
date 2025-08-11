@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gacha Banner Calendars</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <style>
+    .chip { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .scrollbar-thin::-webkit-scrollbar{height:6px;width:6px}
+    .scrollbar-thin::-webkit-scrollbar-thumb{background-color:#cbd5e1;border-radius:8px}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="sticky top-0 z-10 bg-white border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center gap-3">
+      <h1 class="text-2xl font-bold">Gacha Banner Calendars</h1>
+      <span id="nowTZ" class="ml-auto text-sm text-slate-500"></span>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+      <div class="grid md:grid-cols-4 gap-4">
+        <div>
+          <div class="text-sm font-semibold mb-2">Games</div>
+          <div id="gameFilters" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <div class="text-sm font-semibold mb-2">View</div>
+          <div class="inline-flex rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <button id="btnMonth" class="px-3 py-2 text-sm font-medium bg-white hover:bg-slate-50">Month</button>
+            <button id="btnList" class="px-3 py-2 text-sm font-medium bg-white hover:bg-slate-50 border-l border-slate-200">Upcoming</button>
+          </div>
+        </div>
+        <div>
+          <div class="text-sm font-semibold mb-2">Timezone</div>
+          <select id="tzSelect" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm"></select>
+        </div>
+        <div class="flex items-end gap-2">
+          <button id="btnToday" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">Today</button>
+          <button id="btnICS" class="px-3 py-2 rounded-xl bg-slate-900 text-white text-sm hover:opacity-90">Export .ics</button>
+          <a href="https://github.com/" target="_blank" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">Repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="monthNav" class="bg-white rounded-2xl shadow-sm border border-slate-200 px-4 py-3 flex items-center gap-3">
+      <button id="prevMonth" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">←</button>
+      <div id="monthTitle" class="text-lg font-semibold"></div>
+      <button id="nextMonth" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">→</button>
+      <div class="ml-auto text-sm text-slate-500">Showing overlapping banners for selected games</div>
+    </section>
+
+    <section id="monthView" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 hidden">
+      <div class="grid grid-cols-7 text-xs font-semibold text-slate-500 mb-2">
+        <div class="p-2">Mon</div><div class="p-2">Tue</div><div class="p-2">Wed</div>
+        <div class="p-2">Thu</div><div class="p-2">Fri</div><div class="p-2">Sat</div><div class="p-2">Sun</div>
+      </div>
+      <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+    </section>
+
+    <section id="listView" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 hidden">
+      <div id="liveNow" class="mb-4"></div>
+      <div id="upcomingList" class="divide-y divide-slate-200"></div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-500 py-8">
+      Built for HSR · ZZZ · Genshin · Wuthering Waves · Girls' Frontline 2
+    </footer>
+  </main>
+
+  <script>
+    const { DateTime, Interval } = luxon;
+
+    const GAME_META = {
+      HSR:  { label: 'Honkai: Star Rail',   color: 'bg-indigo-600',  tint: 'bg-indigo-50',  text: 'text-indigo-900',  ring: 'ring-indigo-200' },
+      ZZZ:  { label: 'Zenless Zone Zero',   color: 'bg-emerald-600', tint: 'bg-emerald-50', text: 'text-emerald-900', ring: 'ring-emerald-200' },
+      GI:   { label: 'Genshin Impact',      color: 'bg-sky-600',     tint: 'bg-sky-50',     text: 'text-sky-900',     ring: 'ring-sky-200' },
+      WUWA: { label: 'Wuthering Waves',     color: 'bg-rose-600',    tint: 'bg-rose-50',    text: 'text-rose-900',    ring: 'ring-rose-200' },
+      GF2:  { label: 'Girls’ Frontline 2',  color: 'bg-amber-600',   tint: 'bg-amber-50',   text: 'text-amber-900',   ring: 'ring-amber-200' },
+    };
+
+    let DATA = [];
+    const state = {
+      view: 'month',
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Australia/Brisbane',
+      monthCursor: DateTime.now(),
+      gameFilter: new Set(Object.keys(GAME_META)),
+    };
+
+    const el = {
+      gameFilters: document.getElementById('gameFilters'),
+      btnMonth: document.getElementById('btnMonth'),
+      btnList: document.getElementById('btnList'),
+      tzSelect: document.getElementById('tzSelect'),
+      nowTZ: document.getElementById('nowTZ'),
+      monthNav: document.getElementById('monthNav'),
+      monthView: document.getElementById('monthView'),
+      listView: document.getElementById('listView'),
+      monthTitle: document.getElementById('monthTitle'),
+      prevMonth: document.getElementById('prevMonth'),
+      nextMonth: document.getElementById('nextMonth'),
+      calendarGrid: document.getElementById('calendarGrid'),
+      upcomingList: document.getElementById('upcomingList'),
+      liveNow: document.getElementById('liveNow'),
+      btnToday: document.getElementById('btnToday'),
+      btnICS: document.getElementById('btnICS'),
+    };
+
+    init();
+    async function init(){
+      buildTZSelect();
+      el.tzSelect.value = state.tz;
+      el.tzSelect.onchange = ()=>{ state.tz = el.tzSelect.value; render(); };
+      el.btnMonth.onclick = ()=>{ state.view='month'; render(); };
+      el.btnList.onclick  = ()=>{ state.view='list';  render(); };
+      el.prevMonth.onclick = ()=>{ state.monthCursor = state.monthCursor.minus({months:1}); renderMonth(); };
+      el.nextMonth.onclick = ()=>{ state.monthCursor = state.monthCursor.plus({months:1});  renderMonth(); };
+      el.btnToday.onclick  = ()=>{ state.monthCursor = DateTime.now(); render(); };
+      el.btnICS.onclick = exportICS;
+
+      el.gameFilters.innerHTML = Object.entries(GAME_META).map(([k,meta]) => `
+        <label class="inline-flex items-center gap-2 px-2 py-1 rounded-xl border border-slate-200 cursor-pointer ${state.gameFilter.has(k)? 'bg-white' : 'bg-slate-50 opacity-70'}">
+          <input type="checkbox" data-game="${k}" ${state.gameFilter.has(k)?'checked':''} class="accent-slate-900">
+          <span class="text-sm">${meta.label}</span>
+          <span class="ml-1 rounded-full ${meta.color} w-2.5 h-2.5 inline-block"></span>
+        </label>
+      `).join('');
+      el.gameFilters.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+        cb.addEventListener('change', e=>{
+          const g = e.target.getAttribute('data-game');
+          if(e.target.checked) state.gameFilter.add(g); else state.gameFilter.delete(g);
+          render();
+        });
+      });
+
+      setInterval(()=> el.nowTZ.textContent = `Now: ${DateTime.now().setZone(state.tz).toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})`, 1000);
+
+      try {
+        const resp = await fetch('/banners.json', { cache: 'no-cache' });
+        DATA = await resp.json();
+      } catch(e) {
+        DATA = [];
+      }
+      render();
+    }
+
+    function buildTZSelect(){
+      const zones = (Intl.supportedValuesOf && Intl.supportedValuesOf('timeZone')) || [
+        'UTC','Australia/Brisbane','Australia/Sydney','Asia/Shanghai','Asia/Tokyo','Europe/London','Europe/Paris','America/Los_Angeles','America/New_York'
+      ];
+      el.tzSelect.innerHTML = zones.map(z=>`<option value="${z}">${z}</option>`).join('');
+    }
+
+    function render(){
+      el.btnMonth.classList.toggle('bg-slate-900', state.view==='month');
+      el.btnMonth.classList.toggle('text-white', state.view==='month');
+      el.btnList.classList.toggle('bg-slate-900', state.view==='list');
+      el.btnList.classList.toggle('text-white', state.view==='list');
+      el.monthView.classList.toggle('hidden', state.view!=='month');
+      el.monthNav.classList.toggle('hidden', state.view!=='month');
+      el.listView.classList.toggle('hidden', state.view!=='list');
+      if(state.view==='month') renderMonth(); else renderList();
+    }
+
+    function visibleBanners(){
+      const selected = DATA.filter(d => state.gameFilter.has(d.game));
+      return selected.map(d => ({
+        ...d,
+        start: DateTime.fromISO(d.start, {zone:'utc'}),
+        end:   DateTime.fromISO(d.end,   {zone:'utc'}),
+      }));
+    }
+
+    function renderMonth(){
+      const monthStart = state.monthCursor.setZone(state.tz).startOf('month');
+      const mondayStart = monthStart.minus({days: (monthStart.weekday + 6) % 7});
+      const gridStart = mondayStart;
+      const gridCells = 42;
+      el.monthTitle.textContent = monthStart.toFormat('MMMM yyyy');
+      el.calendarGrid.innerHTML = '';
+
+      const banners = visibleBanners();
+      for(let i=0;i<gridCells;i++){
+        const day = gridStart.plus({days:i});
+        const inMonth = day.hasSame(monthStart, 'month');
+        const cellStart = day.startOf('day').setZone('utc');
+        const cellEnd   = day.endOf('day').setZone('utc');
+
+        const matches = banners.filter(b => {
+          const iv = Interval.fromDateTimes(b.start, b.end);
+          const cell = Interval.fromDateTimes(cellStart, cellEnd);
+          return iv.overlaps(cell);
+        });
+
+        const cell = document.createElement('div');
+        cell.className = `min-h-28 border border-slate-200 rounded-xl p-2 flex flex-col gap-1 ${inMonth?'bg-white':'bg-slate-50'}`;
+
+        const dayHdr = document.createElement('div');
+        dayHdr.className = 'text-xs font-semibold text-slate-500';
+        dayHdr.textContent = day.toFormat('d');
+        cell.appendChild(dayHdr);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-1 overflow-y-auto scrollbar-thin';
+        matches.slice(0,4).forEach(b=>{
+          const meta = GAME_META[b.game];
+          const chip = document.createElement('div');
+          chip.className = `chip text-[11px] ${meta.tint} ${meta.text} px-2 py-1 rounded-lg border ${meta.ring}`;
+          const localStart = b.start.setZone(state.tz).toFormat('dd LLL HH:mm');
+          const localEnd = b.end.setZone(state.tz).toFormat('dd LLL HH:mm');
+          chip.title = `${GAME_META[b.game].label}\n${b.name} (${b.phase||'—'})\n${localStart} → ${localEnd}`;
+          chip.innerHTML = `<span class="mr-1 inline-block w-1.5 h-1.5 rounded-full ${meta.color}"></span>${b.game} • ${b.name}`;
+          wrap.appendChild(chip);
+        });
+        if(matches.length>4){
+          const more = document.createElement('div');
+          more.className = 'text-[11px] text-slate-500';
+          more.textContent = `+${matches.length-4} more`;
+          wrap.appendChild(more);
+        }
+        cell.appendChild(wrap);
+        el.calendarGrid.appendChild(cell);
+      }
+    }
+
+    function renderList(){
+      const banners = visibleBanners().sort((a,b)=> a.start - b.start);
+      const now = DateTime.now();
+      const live = banners.filter(b => now >= b.start && now <= b.end);
+      const upcoming = banners.filter(b => b.start >= now).slice(0, 50);
+
+      if(live.length){
+        el.liveNow.innerHTML = `
+          <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-3">
+            <div class="text-sm font-semibold text-emerald-900 mb-2">Live now (${live.length})</div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+              ${live.map(rowCard).join('')}
+            </div>
+          </div>`;
+      }else{
+        el.liveNow.innerHTML = '';
+      }
+      el.upcomingList.innerHTML = upcoming.map(itemRow).join('');
+
+      function progressPct(b){
+        const total = b.end - b.start;
+        const done = Math.min(Math.max(DateTime.now() - b.start, 0), total);
+        return Math.round((done/total)*100);
+      }
+      function rowCard(b){
+        const meta = GAME_META[b.game];
+        const s = b.start.setZone(state.tz);
+        const e = b.end.setZone(state.tz);
+        const pct = progressPct(b);
+        return `
+          <div class="rounded-xl border ${meta.ring} p-3 ${meta.tint}">
+            <div class="flex items-center gap-2 text-sm font-semibold ${meta.text}">
+              <span class="inline-block w-2.5 h-2.5 rounded-full ${meta.color}"></span>
+              ${meta.label}
+              <span class="text-slate-500 font-normal">•</span>
+              <span class="${meta.text}">${b.name}</span>
+            </div>
+            <div class="text-xs text-slate-600 mt-1">${s.toFormat("dd LLL HH:mm")} → ${e.toFormat("dd LLL HH:mm")} (${state.tz})</div>
+            <div class="mt-2 h-2 bg-white/60 rounded-full overflow-hidden">
+              <div class="h-2 ${meta.color}" style="width:${pct}%;"></div>
+            </div>
+          </div>`;
+      }
+      function itemRow(b){
+        const meta = GAME_META[b.game];
+        const s = b.start.setZone(state.tz);
+        const e = b.end.setZone(state.tz);
+        const link = b.source ? `<a class="ml-1 underline text-slate-500" href="${b.source}" target="_blank" rel="noopener">source</a>` : '';
+        return `
+          <div class="py-3 flex flex-col gap-1">
+            <div class="flex items-center gap-2 text-sm font-semibold">
+              <span class="inline-block w-2.5 h-2.5 rounded-full ${meta.color}"></span>
+              <span>${meta.label}</span>
+              <span class="text-slate-500">•</span>
+              <span>${b.name}${b.phase?` (${b.phase})`:''}${link}</span>
+            </div>
+            <div class="text-xs text-slate-600">${s.toFormat("ccc, dd LLL yyyy • HH:mm")} → ${e.toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})</div>
+            ${b.notes?`<div class="text-xs text-slate-500">Notes: ${String(b.notes).replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}</div>`:''}
+          </div>`;
+      }
+    }
+
+    function exportICS(){
+      const banners = visibleBanners();
+      const nowUTC = DateTime.utc().toFormat("yyyyMMdd'T'HHmmss'Z'");
+      const fmt = dt => DateTime.fromJSDate(dt.toJSDate()).toUTC().toFormat("yyyyMMdd'T'HHmmss'Z'");
+      let set = [];
+      if(state.view==='month'){
+        const mStart = state.monthCursor.setZone(state.tz).startOf('month').toUTC();
+        const mEnd   = state.monthCursor.setZone(state.tz).endOf('month').toUTC();
+        set = banners.filter(b => Interval.fromDateTimes(b.start, b.end).overlaps(Interval.fromDateTimes(mStart, mEnd)));
+      }else{
+        const now = DateTime.now();
+        set = banners.filter(b => b.end > now);
+      }
+      const lines = [
+        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BannerCal//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+      ];
+      set.forEach((b,i)=>{
+        const meta = GAME_META[b.game];
+        const uid = `${b.game}-${i}-${b.start.toMillis()}@bannercal`;
+        lines.push(
+          "BEGIN:VEVENT",
+          `UID:${uid}`,
+          `DTSTAMP:${nowUTC}`,
+          `DTSTART:${fmt(b.start)}`,
+          `DTEND:${fmt(b.end)}`,
+          `SUMMARY:${(meta.label + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
+          `DESCRIPTION:${((b.phase?('Phase '+b.phase+' \n'):'') + (b.notes||'')).replace(/[\n,;]/g, ' ')}`,
+          "END:VEVENT"
+        );
+      });
+      lines.push("END:VCALENDAR");
+      const blob = new Blob([lines.join("\r\n")], {type:'text/calendar;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `banner-cal-${state.view==='month'?state.monthCursor.toFormat("yyyy-LL"):'upcoming'}.ics`;
+      document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    }
+  </script>
+</body>
+</html>
