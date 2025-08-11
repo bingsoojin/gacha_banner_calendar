@@ -1,10 +1,38 @@
 [
   {
-    "game": "HSR",
-    "name": "Placeholder",
+    "game": "WUWA",
+    "name": "Phrolova",
     "phase": "—",
-    "start": "2025-08-01T00:00:00Z",
-    "end": "2025-08-03T00:00:00Z",
-    "source": "seed"
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
+    "notes": ""
+  },
+  {
+    "game": "WUWA",
+    "name": "Taoqi",
+    "phase": "—",
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
+    "notes": ""
+  },
+  {
+    "game": "WUWA",
+    "name": "Lumi",
+    "phase": "—",
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
+    "notes": ""
+  },
+  {
+    "game": "WUWA",
+    "name": "Yuanwu",
+    "phase": "—",
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
+    "notes": ""
   }
 ]
