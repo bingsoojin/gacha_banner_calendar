@@ -1,14 +1,18 @@
+// src/sources/common.js
 import * as cheerio from 'cheerio';
 import { DateTime } from 'luxon';
 
-export function fetchDoc(url){
-  return fetch(url, { headers: { 'user-agent': 'banner-cal/1.0 (+github actions)' }})
-    .then(r => { if(!r.ok) throw new Error(`HTTP ${r.status} for ${url}`); return r.text(); })
-    .then(html => ({ $, html: html, ...{ $: cheerio.load(html) }}));
+/** Fetch the page and return Cheerio handle + raw HTML */
+export async function fetchDoc(url){
+  const res = await fetch(url, { headers: { 'user-agent': 'banner-cal/1.0 (+github actions)' } });
+  if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  const html = await res.text();
+  const $ = cheerio.load(html);
+  return { $, html };
 }
 
 export function normalize(text){
-  return (text||'').replace(/\s+/g,' ').replace(/[\u2013\u2014]/g,'-').trim();
+  return (text || '').replace(/\s+/g, ' ').replace(/[\u2013\u2014]/g, '-').trim();
 }
 
 /** Flexible date range parser covering:
@@ -20,6 +24,7 @@ export function extractDateRanges(text, zone='UTC'){
   const t = normalize(text);
   const out = [];
 
+  // 1) Full month names/abbreviations with years on both sides
   const reFull = /([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})\s*(?:-|to)\s*([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})/g;
   for(let m; (m = reFull.exec(t)); ){
     const S = DateTime.fromFormat(m[1].replace('.',''), 'LLLL d, yyyy', { zone });
@@ -27,6 +32,7 @@ export function extractDateRanges(text, zone='UTC'){
     if(S.isValid && E.isValid) out.push(_mkRange(S,E,zone));
   }
 
+  // 2) First date missing year (e.g., "Aug. 12 - Sep. 02, 2025")
   const reHalf = /([A-Z][a-z]{2,}\.?\s+\d{1,2})(?:,\s*(\d{4}))?\s*(?:-|to)\s*([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})/g;
   for(let m; (m = reHalf.exec(t)); ){
     const right = m[3].replace('.','');
@@ -36,6 +42,7 @@ export function extractDateRanges(text, zone='UTC'){
     if(S.isValid && E.isValid) out.push(_mkRange(S,E,zone));
   }
 
+  // 3) Numeric (MM/dd - MM/dd/yyyy)
   const reNum = /(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})\/(\d{4})/g;
   for(let m; (m = reNum.exec(t)); ){
     const [ , m1,d1, m2,d2, y2 ] = m.map(Number);
@@ -55,4 +62,10 @@ function _mkRange(start, end, zone){
     endLocal: end.toISODate(),
     zone
   };
+}
+
+/** Create a normalized record used by all scrapers */
+export function rec({game, name, phase='—', startUTC, endUTC, source, notes=''}) {
+  if(!game || !name || !startUTC || !endUTC) return null;
+  return { game, name: String(name).trim(), phase, start: startUTC, end: endUTC, source, notes };
 }
