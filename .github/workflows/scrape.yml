@@ -2,7 +2,7 @@ name: Nightly Banner Scrape
 
 on:
   schedule:
-    - cron: "0 16 * * *"   # 02:00 AEST (Brisbane)
+    - cron: "0 16 * * *"   # 02:00 AEST
   workflow_dispatch: {}
 
 permissions:
@@ -14,10 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ⬇️ remove "cache: 'npm'" because it requires a lockfile
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - name: Install
         run: npm install --no-audit --no-fund
