@@ -150,7 +150,7 @@
       setInterval(()=> el.nowTZ.textContent = `Now: ${DateTime.now().setZone(state.tz).toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})`, 1000);
 
       try {
-        const resp = await fetch('/banners.json', { cache: 'no-cache' });
+        const resp = await fetch('banners.json', { cache: 'no-cache' });
         DATA = await resp.json();
       } catch(e) {
         DATA = [];
