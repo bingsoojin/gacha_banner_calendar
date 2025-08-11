@@ -9,11 +9,11 @@ import { scrapeGF2 } from './sources/gf2.js';
 const OUT = 'banners.json';
 const MANUAL = 'data/manual.json';
 
-function uniqueKey(x){
+function uniqueKey(x) {
   return [x.game, x.name, x.start, x.end].join('|');
 }
 
-async function main(){
+async function main() {
   const tasks = [
     ['HSR',  scrapeHSR],
     ['ZZZ',  scrapeZZZ],
@@ -23,19 +23,19 @@ async function main(){
   ];
 
   const all = [];
-  for (const [label, fn] of tasks){
+  for (const [label, fn] of tasks) {
     try {
       const rows = await fn();
       console.log(`✔ ${label}: ${rows.length}`);
       all.push(...rows);
-    } catch (e){
+    } catch (e) {
       console.warn(`! ${label} scraper failed:`, e.message);
     }
   }
 
   // Merge manual overrides (take precedence)
   let manual = [];
-  if (existsSync(MANUAL)){
+  if (existsSync(MANUAL)) {
     try { manual = JSON.parse(readFileSync(MANUAL, 'utf8')); } catch {}
   }
 
@@ -45,13 +45,23 @@ async function main(){
 
   const merged = Array.from(map.values())
     .filter(r => DateTime.fromISO(r.start).isValid && DateTime.fromISO(r.end).isValid)
-    .sort((a,b) => DateTime.fromISO(a.start) - DateTime.fromISO(b.start));
+    .sort((a, b) => DateTime.fromISO(a.start) - DateTime.fromISO(b.start));
 
   writeFileSync(OUT, JSON.stringify(merged, null, 2) + '\n', 'utf8');
 
-  const bySrc = { HSR:0, ZZZ:0, GI:0, WUWA:0, GF2:0 };
+  // Stats + visibility guard
+  const bySrc = { HSR: 0, ZZZ: 0, GI: 0, WUWA: 0, GF2: 0 };
   for (const r of merged) bySrc[r.game] = (bySrc[r.game] || 0) + 1;
+
   console.log(`Wrote ${merged.length} records to ${OUT}`, bySrc);
 
-  if ((bySrc.HSR + bySrc.ZZZ + bySrc.GI) === 0){
-    console.error('No HoYoverse banners fou
+  if ((bySrc.HSR + bySrc.ZZZ + bySrc.GI) === 0) {
+    console.error('No HoYoverse banners found (HSR/ZZZ/GI) - failing build for visibility.');
+    process.exit(2);
+  }
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
