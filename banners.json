@@ -1,5 +1,14 @@
 [
   {
+    "game": "HSR",
+    "name": "Hysilens",
+    "phase": "—",
+    "start": "2025-07-23T05:00:00Z",
+    "end": "2025-08-13T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per page"
+  },
+  {
     "game": "WUWA",
     "name": "Phrolova",
     "phase": "—",
@@ -34,5 +43,86 @@
     "end": "2025-08-14T23:59:59.999Z",
     "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
     "notes": ""
+  },
+  {
+    "game": "GI",
+    "name": "Banner Dates Ineffa",
+    "phase": "—",
+    "start": "2025-07-30T05:00:00Z",
+    "end": "2025-08-20T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "GI",
+    "name": "Citlali",
+    "phase": "—",
+    "start": "2025-07-30T05:00:00Z",
+    "end": "2025-08-20T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "GI",
+    "name": "Banner Dates Ineffa and Citlali",
+    "phase": "—",
+    "start": "2025-07-30T05:00:00Z",
+    "end": "2025-08-20T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "GI",
+    "name": "Mualani",
+    "phase": "—",
+    "start": "2025-08-19T05:00:00Z",
+    "end": "2025-09-10T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "GI",
+    "name": "Chasca",
+    "phase": "—",
+    "start": "2025-08-19T05:00:00Z",
+    "end": "2025-09-10T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "GI",
+    "name": "Mualani and Chasca",
+    "phase": "—",
+    "start": "2025-08-19T05:00:00Z",
+    "end": "2025-09-10T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules"
+  },
+  {
+    "game": "HSR",
+    "name": "Cerydra",
+    "phase": "—",
+    "start": "2025-09-02T05:00:00Z",
+    "end": "2025-09-24T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per page"
+  },
+  {
+    "game": "HSR",
+    "name": "Evernight",
+    "phase": "—",
+    "start": "2025-09-23T05:00:00Z",
+    "end": "2025-10-16T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per page"
+  },
+  {
+    "game": "HSR",
+    "name": "Permansor Terrae",
+    "phase": "—",
+    "start": "2025-10-15T05:00:00Z",
+    "end": "2025-11-05T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per page"
   }
 ]
