@@ -222,7 +222,9 @@
           chip.className = `chip text-[11px] ${meta.tint} ${meta.text} px-2 py-1 rounded-lg border ${meta.ring}`;
           const localStart = b.start.setZone(state.tz).toFormat('dd LLL HH:mm');
           const localEnd = b.end.setZone(state.tz).toFormat('dd LLL HH:mm');
-          chip.title = `${GAME_META[b.game].label}\n${b.name} (${b.phase||'—'})\n${localStart} → ${localEnd}`;
+          const vpf = (b.version ? ` v${b.version}` : '') + (b.phase_num ? ` P${b.phase_num}` : '');
+          const rr = b.rerun ? ' [Rerun]' : '';
+          chip.title = `${GAME_META[b.game].label}\n${b.name}${rr}${vpf}\n${localStart} → ${localEnd}`;
           chip.innerHTML = `<span class="mr-1 inline-block w-1.5 h-1.5 rounded-full ${meta.color}"></span>${b.game} • ${b.name}`;
           wrap.appendChild(chip);
         });
@@ -288,10 +290,12 @@
         return `
           <div class="py-3 flex flex-col gap-1">
             <div class="flex items-center gap-2 text-sm font-semibold">
-              <span class="inline-block w-2.5 h-2.5 rounded-full ${meta.color}"></span>
               <span>${meta.label}</span>
-              <span class="text-slate-500">•</span>
-              <span>${b.name}${b.phase?` (${b.phase})`:''}${link}</span>
+                <span class="text-slate-500">•</span>
+                <span>${b.name}</span>
+                ${b.rerun ? '<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">Rerun</span>' : ''}
+                ${b.version ? `<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">v${b.version}${b.phase_num?` P${b.phase_num}`:''}</span>` : ''}
+                ${b.banner_type==='Light Cone' ? '<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">LC</span>' : ''}
             </div>
             <div class="text-xs text-slate-600">${s.toFormat("ccc, dd LLL yyyy • HH:mm")} → ${e.toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})</div>
             ${b.notes?`<div class="text-xs text-slate-500">Notes: ${String(b.notes).replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}</div>`:''}
