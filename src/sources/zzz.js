@@ -70,5 +70,11 @@ export async function scrapeZZZ(){
   }
 
   console.log('[ZZZ] rows produced:', out.length);
+  if (out.length === 0) {
+    const idx = text.indexOf('ZZZ Banner Schedule');
+    if (idx >= 0) {
+      console.log('[ZZZ] snippet:', text.slice(idx, idx + 200));
+    }
+  }
   return out;
 }
