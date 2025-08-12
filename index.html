@@ -8,7 +8,7 @@
   <!-- Luxon (dates/timezones) -->
   <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
 
-  <!-- DARK MODE PRE-INIT: set .dark before paint -->
+  <!-- DARK MODE PRE-INIT -->
   <script>
   (function(){
     try{
@@ -19,70 +19,85 @@
   })();
   </script>
 
-  <!-- THEME: variables + overrides (placed after any other styles) -->
+  <!-- THEME -->
   <style>
     :root{
       --bg:#ffffff; --text:#0f172a; --muted:#475569;
       --card:#f8fafc; --border:#e2e8f0; --chip:#e2e8f0; --accent:#2563eb;
-      --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
+      --hsr:#8b5cf6; --zzz:#06b6d4; --gi:#22c55e; --wuwa:#f59e0b; --gf2:#ef4444;
     }
     .dark{
       color-scheme: dark;
       --bg:#0b1120; --text:#e5e7eb; --muted:#94a3b8;
       --card:#0f172a; --border:#1f2937; --chip:#111827; --accent:#60a5fa;
-      --ok:#34d399; --warn:#fbbf24; --danger:#f87171;
+      --hsr:#a78bfa; --zzz:#22d3ee; --gi:#4ade80; --wuwa:#fbbf24; --gf2:#f87171;
     }
     html, body { background:var(--bg) !important; color:var(--text) !important; margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
     a { color:var(--accent) !important; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 16px 20px 48px; }
-    .toolbar { display:flex; align-items:center; gap:10px; justify-content:space-between; }
-    .toolbar-left { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+
+    .toolbar { display:flex; align-items:center; gap:10px; justify-content:space-between; flex-wrap:wrap; }
+    .toolbar-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .title { font-weight:800; letter-spacing:.2px; }
+    .subtle { color:var(--muted); font-size:13px; }
     .toolbar-right { display:flex; align-items:center; gap:8px; }
 
-    .btn {
-      background: var(--card); color: var(--text); border: 1px solid var(--border);
-      padding: 8px 12px; border-radius: 10px; cursor: pointer;
-    }
-    .btn:disabled { opacity: .6; cursor: default; }
     .seg { display:inline-flex; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
     .seg button { background:var(--card); color:var(--text); padding:8px 12px; border:0; cursor:pointer; }
     .seg button[aria-pressed="true"] { background:var(--chip); font-weight:600; }
+
+    .btn { background: var(--card); color: var(--text); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 10px; cursor: pointer; }
+    .btn:disabled { opacity: .6; cursor: default; }
+
+    .pillbar { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .pill { border:1px solid var(--border); background:var(--card); color:var(--text); padding:6px 10px; border-radius:999px; cursor:pointer; font-size:13px; }
+    .pill[aria-pressed="true"] { background:var(--chip); font-weight:600; }
+
     .theme-toggle{
       border:1px solid var(--border); background:var(--card); color:var(--text);
       border-radius:9999px; padding:8px 10px; cursor:pointer; line-height:1;
     }
-    .title { font-weight:800; letter-spacing:.2px; }
-    .subtle { color:var(--muted); font-size:13px; }
 
-    /* Month grid */
-    .month-head { display:flex; align-items:center; gap:10px; margin-top:14px; margin-bottom:8px; }
+    /* Current strip */
+    .current-strip { margin-top:14px; display:grid; gap:8px; }
+    .current-card { display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:var(--card); }
+    .game-tag { font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); }
+    .status-chip { font-size:10px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); margin-left:6px; color:var(--muted); }
+
+    /* Month calendar like Game8 (7 columns, week rows, bars spanning) */
+    .month-head { display:flex; align-items:center; gap:10px; margin-top:16px; margin-bottom:8px; }
     .month-head .spacer { flex:1; }
     .month { border:1px solid var(--border); border-radius:14px; overflow:hidden; background:var(--card); }
     .dow { display:grid; grid-template-columns: repeat(7, 1fr); gap:1px; background:var(--border); }
     .dow div { background:var(--card); text-align:center; padding:8px 0; font-size:12px; color:var(--muted); }
-    .grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:1px; background:var(--border); }
-    .cell { background:var(--card); min-height:104px; padding:8px; position:relative; }
-    .daynum { font-size:12px; color:var(--muted); }
-    .cell.today .daynum { color: var(--accent); font-weight:700; }
-    .chip {
-      display:inline-block; margin:4px 0 0; padding:4px 6px; font-size:12px;
-      border-radius:8px; background:var(--chip); border:1px solid var(--border); color:var(--text);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
-    }
-    .chip .g { font-weight:600; }
-    .chip .t { color:var(--muted); font-weight:600; margin-left:6px; }
-    .chip .tag { margin-left:6px; font-size:10px; padding:2px 6px; border-radius:999px; border:1px solid var(--border); background:transparent; }
-    .pill-ok   { border-color: var(--ok);   color: var(--ok); }
-    .pill-warn { border-color: var(--warn); color: var(--warn); }
-    .pill-neu  { border-color: var(--muted); color: var(--muted); }
-    .pill-zzzw { border-color: var(--accent); color: var(--accent); }
+    .week { border-top:1px solid var(--border); }
+    .week-dates { display:grid; grid-template-columns: repeat(7, 1fr); gap:1px; background:var(--border); }
+    .datecell { background:var(--card); padding:6px 8px; font-size:12px; color:var(--muted); }
+    .datecell.today { color:var(--accent); font-weight:700; }
+    .week-bars { display:grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 24px; gap:2px 1px; padding:6px; }
 
-    /* Upcoming/List */
-    .list { margin-top:16px; display:grid; gap:8px; }
-    .row {
-      display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:var(--card);
+    .bar {
+      font-size:12px; border-radius:8px; padding:2px 6px; color:#0b1320;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      align-self:center;
     }
+    .dark .bar { color:#0b1320; } /* bars use light text-on-colored pills; keep readable */
+
+    .bar.hsr { background: linear-gradient(0deg, var(--hsr), var(--hsr)); }
+    .bar.zzz { background: linear-gradient(0deg, var(--zzz), var(--zzz)); }
+    .bar.gi  { background: linear-gradient(0deg, var(--gi),  var(--gi)); }
+    .bar.wu  { background: linear-gradient(0deg, var(--wuwa),var(--wuwa)); }
+    .bar.gf2 { background: linear-gradient(0deg, var(--gf2), var(--gf2)); }
+
+    .bar .abbr { font-weight:800; }
+    .bar .name { margin-left:6px; font-weight:600; }
+    .bar .tag { margin-left:6px; font-size:10px; padding:0 6px; border-radius:999px; background:rgba(255,255,255,.45); }
+
+    /* Upcoming list */
+    .list { margin-top:16px; display:grid; gap:8px; }
+    .row { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:var(--card); }
     .row .when { min-width: 220px; color:var(--muted); font-size:13px; }
     .row .who  { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .row .who .name { font-weight:600; }
@@ -91,7 +106,6 @@
 
     footer { margin-top:26px; padding-top:14px; border-top:1px solid var(--border); color:var(--muted); font-size:13px; }
 
-    /* Simple hide helper */
     .hidden { display:none !important; }
   </style>
 </head>
@@ -115,6 +129,12 @@
       </div>
     </div>
 
+    <!-- Filter pills -->
+    <div class="pillbar" id="filterBar" role="group" aria-label="Game filters"></div>
+
+    <!-- Current banners strip (for selected games) -->
+    <div id="currentStrip" class="current-strip"></div>
+
     <!-- Month view -->
     <div id="monthView" class="month-view">
       <div class="month-head">
@@ -123,11 +143,11 @@
         <div class="spacer"></div>
         <button id="btnNext" class="btn" title="Next month">→</button>
       </div>
-      <div class="month">
+      <div class="month" id="monthCal">
         <div class="dow">
           <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
         </div>
-        <div id="monthGrid" class="grid"></div>
+        <div id="weeks"></div>
       </div>
     </div>
 
@@ -140,39 +160,40 @@
 
     <footer id="footer">
       Built for: Honkai: Star Rail • Zenless Zone Zero • <strong>Genshin Impact</strong> • Wuthering Waves • Girls’ Frontline 2
-      <div style="margin-top:6px;">Data source credits shown per entry (hover for tooltip).</div>
+      <div style="margin-top:6px;">Hover any item for source + local dates. Filters hide Light Cones, W-Engines and weapons by design.</div>
     </footer>
   </div>
 
   <script>
-    // ==== Global state ====
     const { DateTime, Interval } = luxon;
 
-    const GAME_META = {
-      HSR:  { label: 'Honkai: Star Rail' },
-      ZZZ:  { label: 'Zenless Zone Zero' },
-      GI:   { label: 'Genshin Impact' }, // ensure full name everywhere
-      WUWA: { label: 'Wuthering Waves' },
-      GF2:  { label: "Girls’ Frontline 2" }
+    // Labels (full + abbreviated)
+    const GAME_LABEL = {
+      HSR:  'Honkai: Star Rail',
+      ZZZ:  'Zenless Zone Zero',
+      GI:   'Genshin Impact',
+      WUWA: 'Wuthering Waves',
+      GF2:  "Girls’ Frontline 2"
     };
+    const GAME_ABBR = { HSR:'HSR', ZZZ:'ZZZ', GI:'GI', WUWA:'WUWA', GF2:'GFL2' };
+    const GAME_ORDER = ['HSR','ZZZ','GI','WUWA','GF2'];
 
+    // State
     const state = {
       tz: DateTime.local().zoneName,
       view: 'month',
       monthCursor: DateTime.local().startOf('month'),
-      data: []
+      data: [],
+      filter: new Set(GAME_ORDER), // start with All
     };
 
-    // ==== Theme (runtime) ====
+    // Theme
     const THEME_KEY = 'theme';
     function applyTheme(mode){
       const isDark = mode === 'dark';
       document.documentElement.classList.toggle('dark', isDark);
       const b = document.getElementById('btnDark');
-      if(b){
-        b.setAttribute('aria-pressed', String(isDark));
-        b.textContent = isDark ? '☀️' : '🌙';
-      }
+      if(b){ b.setAttribute('aria-pressed', String(isDark)); b.textContent = isDark ? '☀️' : '🌙'; }
     }
     function initTheme(){
       const saved = localStorage.getItem(THEME_KEY);
@@ -185,10 +206,10 @@
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
     }
 
-    // ==== Data load ====
+    // Data load (robust)
     async function loadData(){
       try {
-        const resp = await fetch('banners.json?t=' + Date.now(), { cache: 'no-cache' });
+        const resp = await fetch('banners.json?t='+Date.now(), { cache:'no-cache' });
         const raw = await resp.text();
         let parsed = null;
         try { parsed = JSON.parse(raw); } catch {}
@@ -196,73 +217,207 @@
         if (!Array.isArray(parsed)) parsed = [];
         state.data = parsed.map(x => ({
           ...x,
-          start: DateTime.fromISO(x.start, { zone: 'utc' }),
-          end:   DateTime.fromISO(x.end,   { zone: 'utc' })
+          start: DateTime.fromISO(x.start, { zone:'utc' }),
+          end:   DateTime.fromISO(x.end,   { zone:'utc' })
         }));
-      } catch {
-        state.data = [];
-      }
+      } catch { state.data = []; }
+    }
+
+    // Inclusion rules
+    function includeBanner(b){
+      // Game filter
+      if (!state.filter.has(b.game)) return false;
+
+      // Hide unwanted banner types
+      const bt = (b.banner_type || '').toLowerCase();
+      if (b.game==='HSR' && bt.includes('light cone')) return false;
+      if (bt.includes('w-engine')) return false;          // ZZZ W-Engines
+      if (bt.includes('weapon')) return false;            // GI/WUWA weapons if ever present
+
+      // Hide 4-star/A-rank reruns when metadata is present
+      const notes = (b.notes||'').toLowerCase();
+      if (b.rerun && (
+          b.stars===4 ||
+          /4.?star|4★/.test(notes) ||
+          /a-?rank/.test(notes)
+      )) return false;
+
+      return true;
     }
 
     function visibleBanners(){
-      // Basic filter: all games; extend with toggles later if needed
-      return state.data;
+      return state.data.filter(includeBanner);
     }
 
-    // ==== Rendering ====
-    function render(){
-      document.getElementById('btnMonth').setAttribute('aria-pressed', String(state.view==='month'));
-      document.getElementById('btnUpcoming').setAttribute('aria-pressed', String(state.view==='upcoming'));
-      document.getElementById('monthView').classList.toggle('hidden', state.view!=='month');
-      document.getElementById('listView').classList.toggle('hidden', state.view!=='upcoming');
-      if(state.view==='month') renderMonth(); else renderUpcoming();
+    // Filter pills
+    function buildFilterBar(){
+      const bar = document.getElementById('filterBar');
+      bar.innerHTML = '';
+      const make = (id, label) => {
+        const btn = document.createElement('button');
+        btn.className = 'pill';
+        btn.textContent = label;
+        btn.setAttribute('aria-pressed', String(state.filter.has(id)));
+        btn.addEventListener('click', ()=>{
+          if (id==='ALL'){
+            state.filter = new Set(GAME_ORDER);
+            Array.from(bar.children).forEach(c=>c.setAttribute('aria-pressed','false'));
+            Array.from(bar.children).forEach(c=>{ if(c.dataset.id!=='ALL'){ c.setAttribute('aria-pressed','true'); }});
+          }else{
+            if (state.filter.has(id)) {
+              if (state.filter.size>1) state.filter.delete(id); // keep at least one
+            } else {
+              state.filter.add(id);
+            }
+            // update toggles
+            Array.from(bar.children).forEach(c=>{
+              if(c.dataset.id==='ALL'){
+                c.setAttribute('aria-pressed','false');
+              }else{
+                c.setAttribute('aria-pressed', String(state.filter.has(c.dataset.id)));
+              }
+            });
+          }
+          render();
+        });
+        btn.dataset.id = id;
+        return btn;
+      };
+      bar.appendChild(make('ALL','All'));
+      for(const g of GAME_ORDER){
+        bar.appendChild(make(g, GAME_LABEL[g]));
+      }
     }
 
+    // Current banners strip
+    function renderCurrentStrip(){
+      const el = document.getElementById('currentStrip');
+      el.innerHTML = '';
+      const now = DateTime.now();
+      const byGame = new Map();
+      for(const g of state.filter) byGame.set(g, []);
+
+      for(const b of visibleBanners()){
+        if (b.start <= now && b.end >= now && byGame.has(b.game)){
+          byGame.get(b.game).push(b);
+        }
+      }
+      for(const g of GAME_ORDER){
+        if (!state.filter.has(g)) continue;
+        const arr = byGame.get(g)||[];
+        if (arr.length===0) continue;
+        // show up to two current entries
+        for(const b of arr.slice(0,2)){
+          const card = document.createElement('div');
+          card.className = 'current-card';
+          const tag = document.createElement('span');
+          tag.className = 'game-tag';
+          tag.textContent = GAME_LABEL[b.game];
+          const name = document.createElement('div');
+          const s = b.start.setZone(state.tz).toFormat('LLL d');
+          const e = b.end.setZone(state.tz).toFormat('LLL d');
+          name.innerHTML = `<strong>${escapeHtml(b.name)}</strong> <span class="subtle">• ${s} → ${e}</span>`;
+          const status = document.createElement('span');
+          if (b.status){
+            status.className = 'status-chip';
+            status.textContent = b.status[0].toUpperCase() + b.status.slice(1);
+          }
+          card.appendChild(tag);
+          card.appendChild(name);
+          if (b.status) card.appendChild(status);
+          el.appendChild(card);
+        }
+      }
+    }
+
+    // Month calendar with spanning bars
     function renderMonth(){
-      const label = state.monthCursor.toFormat('MMMM yyyy');
-      document.getElementById('monthLabel').textContent = label;
+      document.getElementById('monthLabel').textContent = state.monthCursor.toFormat('MMMM yyyy');
 
-      const grid = document.getElementById('monthGrid');
-      grid.innerHTML = '';
+      const weeksEl = document.getElementById('weeks');
+      weeksEl.innerHTML = '';
 
-      // Start Monday; compute first cell
       const startOfMonth = state.monthCursor.startOf('month');
-      const startWeekday = (startOfMonth.weekday + 6) % 7; // 0=Mon .. 6=Sun
-      const firstCellDate = startOfMonth.minus({ days: startWeekday });
-
+      const startWeekdayIdx = (startOfMonth.weekday + 6) % 7; // 0=Mon
+      const firstMonday = startOfMonth.minus({ days: startWeekdayIdx });
       const banners = visibleBanners();
 
-      for(let i=0;i<42;i++){
-        const day = firstCellDate.plus({ days:i }).setZone(state.tz);
-        const cell = document.createElement('div');
-        cell.className = 'cell' + (day.hasSame(DateTime.local(), 'day') ? ' today' : '');
+      for(let w=0; w<6; w++){
+        const wStart = firstMonday.plus({ days: w*7 }).setZone(state.tz).startOf('day');
+        const wEnd   = wStart.plus({ days: 6 }).endOf('day');
 
-        const dn = document.createElement('div');
-        dn.className = 'daynum';
-        dn.textContent = day.toFormat('d');
-        cell.appendChild(dn);
-
-        // Local-day overlap: avoid off-by-one
-        const cellStart = day.startOf('day');
-        const cellEnd   = day.endOf('day');
-
-        const matches = banners.filter(b => {
-          const s = b.start.setZone(state.tz).startOf('day');
-          const e = b.end.setZone(state.tz).endOf('day');
-          return Interval.fromDateTimes(s, e).overlaps(Interval.fromDateTimes(cellStart, cellEnd));
-        });
-
-        for(const b of matches){
-          const chip = document.createElement('div');
-          chip.className = 'chip';
-          chip.title = tooltipFor(b);
-
-          const meta = GAME_META[b.game] || { label: b.game };
-          chip.innerHTML = `<span class="g">${meta.label}</span><span class="t">•</span> ${escapeHtml(b.name)} ${tagsHTML(b)}`;
-          cell.appendChild(chip);
+        // Dates row
+        const dateRow = document.createElement('div');
+        dateRow.className = 'week-dates';
+        for(let i=0;i<7;i++){
+          const d = wStart.plus({ days:i });
+          const cell = document.createElement('div');
+          cell.className = 'datecell' + (d.hasSame(DateTime.local(), 'day') ? ' today':'');
+          cell.textContent = d.toFormat('d');
+          dateRow.appendChild(cell);
         }
 
-        grid.appendChild(cell);
+        // Bars
+        const barGrid = document.createElement('div');
+        barGrid.className = 'week-bars';
+
+        // Segment banners to this week and lay them on tracks
+        const segs = [];
+        for(const b of banners){
+          const s = b.start.setZone(state.tz);
+          const e = b.end.setZone(state.tz);
+          const ovStart = s > wStart ? s : wStart;
+          const ovEnd   = e < wEnd   ? e : wEnd;
+          if (ovEnd < wStart || ovStart > wEnd) continue;
+
+          // compute grid start (1..7) and span (1..7)
+          const startCol = Math.max(1, Math.min(7, Math.floor(ovStart.diff(wStart,'days').days) + 1));
+          const endCol   = Math.max(1, Math.min(7, Math.floor(ovEnd.diff(wStart,'days').days) + 1));
+          const span = Math.max(1, endCol - startCol + 1);
+
+          segs.push({ b, startCol, span });
+        }
+
+        // Track assignment (greedy)
+        const tracks = []; // each track: [{startCol, endCol}]
+        function placeOnTrack(seg){
+          for(let t=0;t<tracks.length;t++){
+            const used = tracks[t];
+            let clash = false;
+            for(const u of used){
+              const A1 = seg.startCol, A2 = seg.startCol + seg.span - 1;
+              const B1 = u.startCol,  B2 = u.endCol;
+              if (!(A2 < B1 || A1 > B2)) { clash = true; break; }
+            }
+            if (!clash){ used.push({startCol: seg.startCol, endCol: seg.startCol+seg.span-1}); return t+1; }
+          }
+          tracks.push([{startCol: seg.startCol, endCol: seg.startCol+seg.span-1}]);
+          return tracks.length;
+        }
+
+        for(const seg of segs){
+          const row = placeOnTrack(seg);
+          const div = document.createElement('div');
+          const g = seg.b.game;
+          div.className = 'bar ' + (g==='HSR'?'hsr':g==='ZZZ'?'zzz':g==='GI'?'gi':g==='WUWA'?'wu':'gf2');
+          div.style.gridColumn = `${seg.startCol} / span ${seg.span}`;
+          div.style.gridRow = String(row);
+
+          // Abbreviated label on calendar
+          const ab = GAME_ABBR[g] || g;
+          const tags = [];
+          if (seg.b.rerun) tags.push('Rerun');
+          if (seg.b.status) tags.push(seg.b.status[0].toUpperCase()+seg.b.status.slice(1));
+          div.title = tooltipFor(seg.b);
+          div.innerHTML = `<span class="abbr">${ab}</span><span class="name">${escapeHtml(seg.b.name)}</span>${tags.length?` <span class="tag">${tags.join(' · ')}</span>`:''}`;
+          barGrid.appendChild(div);
+        }
+
+        const weekWrap = document.createElement('div');
+        weekWrap.className = 'week';
+        weekWrap.appendChild(dateRow);
+        weekWrap.appendChild(barGrid);
+        weeksEl.appendChild(weekWrap);
       }
     }
 
@@ -296,23 +451,22 @@
     function rowItem(b, isLive){
       const r = document.createElement('div');
       r.className = 'row'; r.title = tooltipFor(b);
-
       const sLocal = b.start.setZone(state.tz).toFormat('LLL d');
       const eLocal = b.end.setZone(state.tz).toFormat('LLL d');
+
       const when = document.createElement('div');
       when.className = 'when';
       when.textContent = isLive ? `Live • ends ${eLocal}` : `${sLocal} → ${eLocal}`;
 
       const who = document.createElement('div');
       who.className = 'who';
-      const meta = GAME_META[b.game] || { label: b.game };
-      who.innerHTML = `<span class="name">${meta.label} • ${escapeHtml(b.name)}</span> ${tagsHTML(b)}`;
+      who.innerHTML = `<span class="name">${GAME_LABEL[b.game]} • ${escapeHtml(b.name)}</span> ${tagsHTML(b)}`;
 
       const metaBox = document.createElement('div');
       metaBox.className = 'meta';
       if (b.status){
         const st = document.createElement('span');
-        st.className = 'tag ' + (b.status==='current' ? 'pill-ok' : b.status==='upcoming' ? 'pill-warn' : 'pill-neu');
+        st.className = 'tag';
         st.textContent = b.status[0].toUpperCase() + b.status.slice(1);
         metaBox.appendChild(st);
       }
@@ -334,25 +488,20 @@
       const tags = [];
       if (b.version) tags.push(`<span class="tag">v${escapeHtml(b.version)}${b.phase_num?` P${b.phase_num}`:''}</span>`);
       if (b.rerun)   tags.push(`<span class="tag">Rerun</span>`);
-      if (b.banner_type === 'Light Cone') tags.push(`<span class="tag">LC</span>`);
-      if (b.banner_type === 'W-Engine')   tags.push(`<span class="tag pill-zzzw">W-Engine</span>`);
       return tags.join(' ');
     }
 
     function tooltipFor(b){
-      const meta = GAME_META[b.game] || { label: b.game };
       const localStart = b.start.setZone(state.tz).toFormat('DDDD');
       const localEnd   = b.end.setZone(state.tz).toFormat('DDDD');
       const vpf = (b.version ? ` v${b.version}` : '') + (b.phase_num ? ` P${b.phase_num}` : '');
       const rr  = b.rerun ? ' [Rerun]' : '';
-      return `${meta.label}\n${b.name}${rr}${vpf}\n${localStart} → ${localEnd}`;
+      return `${GAME_LABEL[b.game]}\n${b.name}${rr}${vpf}\n${localStart} → ${localEnd}`;
     }
 
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-    // ==== ICS export (all-day) ====
+    // ICS export (all-day)
     function exportICS(){
       const banners = visibleBanners();
       const nowUTC = DateTime.utc().toFormat("yyyyMMdd'T'HHmmss'Z'");
@@ -365,8 +514,8 @@
             b.start.setZone(state.tz).startOf('day'),
             b.end.setZone(state.tz).endOf('day')
           );
-          const cell = Interval.fromDateTimes(mStart, mEnd);
-          return iv.overlaps(cell);
+          const mv = Interval.fromDateTimes(mStart, mEnd);
+          return iv.overlaps(mv);
         });
       }else{
         const now = DateTime.now();
@@ -376,16 +525,14 @@
         "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BannerCal//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
       ];
       set.forEach((b,i)=>{
-        const meta = GAME_META[b.game] || { label: b.game };
         const uid = `${b.game}-${i}-${b.start.toMillis()}@bannercal`;
         lines.push(
           "BEGIN:VEVENT",
           `UID:${uid}`,
           `DTSTAMP:${nowUTC}`,
-          // All-day ICS: local start date, end exclusive (+1 day)
           `DTSTART;VALUE=DATE:${b.start.setZone(state.tz).startOf('day').toFormat('yyyyMMdd')}`,
           `DTEND;VALUE=DATE:${b.end.setZone(state.tz).plus({ days: 1 }).startOf('day').toFormat('yyyyMMdd')}`,
-          `SUMMARY:${(meta.label + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
+          `SUMMARY:${(GAME_LABEL[b.game] + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
           `DESCRIPTION:${((b.phase?('Phase '+b.phase+' \n'):'') + (b.notes||'')).replace(/[\n,;]/g, ' ')}`,
           "END:VEVENT"
         );
@@ -399,11 +546,11 @@
       setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
     }
 
-    // ==== Init / events ====
+    // Init / events
     document.addEventListener('DOMContentLoaded', async ()=>{
       initTheme();
 
-      // Controls
+      // View + actions
       document.getElementById('btnDark').addEventListener('click', toggleTheme);
       document.getElementById('btnMonth').addEventListener('click', ()=>{ state.view='month'; render(); });
       document.getElementById('btnUpcoming').addEventListener('click', ()=>{ state.view='upcoming'; render(); });
@@ -411,9 +558,33 @@
       document.getElementById('btnNext').addEventListener('click', ()=>{ state.monthCursor = state.monthCursor.plus({ months:1 }); render(); });
       document.getElementById('btnExport').addEventListener('click', exportICS);
 
+      // Filters
+      buildFilterBar();
+
       await loadData();
       render();
     });
+
+    function render(){
+      // toggle views
+      document.getElementById('btnMonth').setAttribute('aria-pressed', String(state.view==='month'));
+      document.getElementById('btnUpcoming').setAttribute('aria-pressed', String(state.view==='upcoming'));
+      document.getElementById('monthView').classList.toggle('hidden', state.view!=='month');
+      document.getElementById('listView').classList.toggle('hidden', state.view!=='upcoming');
+
+      // refresh UI
+      renderCurrentStrip();
+      if (state.view==='month') renderMonth(); else renderUpcoming();
+
+      // refresh pills pressed states
+      const bar = document.getElementById('filterBar');
+      Array.from(bar.children).forEach(c=>{
+        const id = c.dataset && c.dataset.id;
+        if (!id) return;
+        if (id==='ALL') c.setAttribute('aria-pressed','false');
+        else c.setAttribute('aria-pressed', String(state.filter.has(id)));
+      });
+    }
   </script>
 </body>
 </html>
