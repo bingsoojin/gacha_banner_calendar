@@ -160,70 +160,6 @@
     "status": "past"
   },
   {
-    "game": "HSR",
-    "name": "Indelible Coterie",
-    "phase": "2",
-    "start": "2025-07-23T05:00:00Z",
-    "end": "2025-08-13T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.4",
-    "phase_num": 2,
-    "status": "current",
-    "banner_type": "Character",
-    "rerun": false
-  },
-  {
-    "game": "HSR",
-    "name": "Light Cones",
-    "phase": "2",
-    "start": "2025-07-23T05:00:00Z",
-    "end": "2025-08-13T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.4",
-    "phase_num": 2,
-    "status": "current",
-    "banner_type": "Light Cone",
-    "rerun": false
-  },
-  {
-    "game": "WUWA",
-    "name": "Phrolova",
-    "phase": "—",
-    "start": "2025-07-24T00:00:00Z",
-    "end": "2025-08-14T23:59:59.999Z",
-    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
-    "notes": ""
-  },
-  {
-    "game": "WUWA",
-    "name": "Taoqi",
-    "phase": "—",
-    "start": "2025-07-24T00:00:00Z",
-    "end": "2025-08-14T23:59:59.999Z",
-    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
-    "notes": ""
-  },
-  {
-    "game": "WUWA",
-    "name": "Lumi",
-    "phase": "—",
-    "start": "2025-07-24T00:00:00Z",
-    "end": "2025-08-14T23:59:59.999Z",
-    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
-    "notes": ""
-  },
-  {
-    "game": "WUWA",
-    "name": "Yuanwu",
-    "phase": "—",
-    "start": "2025-07-24T00:00:00Z",
-    "end": "2025-08-14T23:59:59.999Z",
-    "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
-    "notes": ""
-  },
-  {
     "game": "GF2",
     "name": "Now Live",
     "phase": "—",
@@ -244,40 +180,13 @@
     "status": "current"
   },
   {
-    "game": "GI",
-    "name": "Banner Dates Ineffa",
-    "phase": "—",
-    "start": "2025-07-30T05:00:00Z",
-    "end": "2025-08-20T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
-    "game": "GI",
-    "name": "Citlali",
-    "phase": "—",
-    "start": "2025-07-30T05:00:00Z",
-    "end": "2025-08-20T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
-    "game": "GI",
-    "name": "Banner Dates Ineffa and Citlali",
-    "phase": "—",
-    "start": "2025-07-30T05:00:00Z",
-    "end": "2025-08-20T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
     "game": "ZZZ",
-    "name": "ZZZ Banner Schedule Alice",
+    "name": "Alice",
     "phase": "—",
     "start": "2025-08-06T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "ZZZ Banner Schedule (Game8)",
+    "notes": "Schedule block on Game8",
     "banner_type": "Agent",
     "rerun": false
   },
@@ -288,8 +197,8 @@
     "start": "2025-08-06T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "ZZZ Banner Schedule (Game8)",
-    "banner_type": "W-Engine",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
     "rerun": false
   },
   {
@@ -299,7 +208,7 @@
     "start": "2025-08-06T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "ZZZ Banner Schedule (Game8)",
+    "notes": "Schedule block on Game8",
     "banner_type": "Agent",
     "rerun": true
   },
@@ -310,51 +219,37 @@
     "start": "2025-08-06T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "ZZZ Banner Schedule (Game8)",
-    "banner_type": "W-Engine",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
     "rerun": false
   },
   {
     "game": "HSR",
     "name": "Hysilens",
-    "phase": "1",
+    "phase": "2",
     "start": "2025-08-12T05:00:00Z",
     "end": "2025-09-03T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "3.5",
-    "phase_num": 1,
-    "status": "next",
+    "version": "3.4",
+    "phase_num": 2,
+    "status": "current",
     "banner_type": "Character",
     "rerun": false
   },
   {
     "game": "HSR",
     "name": "Kafka",
-    "phase": "1",
+    "phase": "2",
     "start": "2025-08-12T05:00:00Z",
     "end": "2025-09-03T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "3.5",
-    "phase_num": 1,
-    "status": "next",
+    "version": "3.4",
+    "phase_num": 2,
+    "status": "current",
     "banner_type": "Character",
     "rerun": true
-  },
-  {
-    "game": "HSR",
-    "name": "Light Cones",
-    "phase": "1",
-    "start": "2025-08-12T05:00:00Z",
-    "end": "2025-09-03T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.5",
-    "phase_num": 1,
-    "status": "next",
-    "banner_type": "Light Cone",
-    "rerun": false
   },
   {
     "game": "GF2",
@@ -377,42 +272,15 @@
     "status": "upcoming"
   },
   {
-    "game": "GI",
-    "name": "Mualani",
-    "phase": "—",
-    "start": "2025-08-19T05:00:00Z",
-    "end": "2025-09-10T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
-    "game": "GI",
-    "name": "Chasca",
-    "phase": "—",
-    "start": "2025-08-19T05:00:00Z",
-    "end": "2025-09-10T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
-    "game": "GI",
-    "name": "Mualani and Chasca",
-    "phase": "—",
-    "start": "2025-08-19T05:00:00Z",
-    "end": "2025-09-10T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules"
-  },
-  {
     "game": "HSR",
     "name": "Cerydra",
-    "phase": "2",
+    "phase": "1",
     "start": "2025-09-02T05:00:00Z",
     "end": "2025-09-24T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
     "version": "3.5",
-    "phase_num": 2,
+    "phase_num": 1,
     "status": "next",
     "banner_type": "Character",
     "rerun": false
@@ -420,29 +288,15 @@
   {
     "game": "HSR",
     "name": "Silver Wolf",
-    "phase": "2",
+    "phase": "1",
     "start": "2025-09-02T05:00:00Z",
     "end": "2025-09-24T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
     "version": "3.5",
-    "phase_num": 2,
+    "phase_num": 1,
     "status": "next",
     "banner_type": "Character",
-    "rerun": false
-  },
-  {
-    "game": "HSR",
-    "name": "Light Cones",
-    "phase": "2",
-    "start": "2025-09-02T05:00:00Z",
-    "end": "2025-09-24T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.5",
-    "phase_num": 2,
-    "status": "next",
-    "banner_type": "Light Cone",
     "rerun": false
   },
   {
@@ -464,33 +318,5 @@
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
-  },
-  {
-    "game": "HSR",
-    "name": "Evernight",
-    "phase": "1",
-    "start": "2025-09-23T05:00:00Z",
-    "end": "2025-10-16T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.6",
-    "phase_num": 1,
-    "status": "upcoming",
-    "banner_type": "Character",
-    "rerun": false
-  },
-  {
-    "game": "HSR",
-    "name": "Permansor Terrae",
-    "phase": "2",
-    "start": "2025-10-15T05:00:00Z",
-    "end": "2025-11-05T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.6",
-    "phase_num": 2,
-    "status": "upcoming",
-    "banner_type": "Character",
-    "rerun": false
   }
 ]
