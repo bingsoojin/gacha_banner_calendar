@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- THEME: variables + light/dark palettes -->
   <style>
     :root{
       --bg:#ffffff; --text:#0f172a; --muted:#475569;
@@ -45,6 +46,8 @@
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
+  <!-- THEME: dark mode toggle -->
+  <button id="btnDark" class="theme-toggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
   <header class="sticky top-0 z-10 bg-white border-b border-slate-200/70">
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center gap-3">
       <h1 class="text-2xl font-bold">Gacha Banner Calendars</h1>
@@ -350,7 +353,6 @@
           "BEGIN:VEVENT",
           `UID:${uid}`,
           `DTSTAMP:${nowUTC}`,
-          // All-day ICS: local start date, end is exclusive (+1 day)
           `DTSTART;VALUE=DATE:${b.start.setZone(state.tz).startOf('day').toFormat('yyyyMMdd')}`,
           `DTEND;VALUE=DATE:${b.end.setZone(state.tz).plus({ days: 1 }).startOf('day').toFormat('yyyyMMdd')}`,
           `SUMMARY:${(meta.label + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
@@ -366,6 +368,43 @@
       document.body.appendChild(a); a.click();
       setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
     }
+  </script>
+
+  <!-- DROP-IN 3: theme + footer logic -->
+  <script>
+    const THEME_KEY = 'theme';
+    function applyTheme(mode){
+      const isDark = mode === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      const b = document.getElementById('btnDark');
+      if(b){
+        b.setAttribute('aria-pressed', String(isDark));
+        b.textContent = isDark ? '☀️' : '🌙';
+      }
+    }
+    function initTheme(){
+      const saved = localStorage.getItem(THEME_KEY);
+      const pref = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      applyTheme(saved || pref);
+    }
+    function toggleTheme(){
+      const isDark = !document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'dark' : 'light');
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      initTheme();
+      const btn = document.getElementById('btnDark');
+      if(btn) btn.addEventListener('click', toggleTheme);
+
+      // Ensure "Genshin Impact" wording in footer and labels
+      document.querySelectorAll('footer, .footer, #footer').forEach(el=>{
+        el.innerHTML = el.innerHTML.replace(/Genshin(?!\s*Impact)/g, 'Genshin Impact');
+      });
+      if (window.GAME_META && window.GAME_META.GI) {
+        window.GAME_META.GI.label = 'Genshin Impact';
+      }
+    });
   </script>
 </body>
 </html>
