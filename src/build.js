@@ -4,7 +4,7 @@ import { scrapeHSR } from './sources/hsr.js';
 import { scrapeZZZ } from './sources/zzz.js';
 import { scrapeGI } from './sources/genshin.js';
 import { scrapeWUWA } from './sources/wuwa.js';
-import { scrapeGF2 } from './sources/gf2.js';
+import { scrapeGFL2 } from './sources/gfl2.js';
 
 const OUT = 'banners.json';
 const MANUAL = 'data/manual.json';
@@ -19,7 +19,7 @@ async function main() {
     ['ZZZ',  scrapeZZZ],
     ['GI',   scrapeGI],
     ['WUWA', scrapeWUWA],
-    ['GF2',  scrapeGF2],
+    ['GFL2',  scrapeGF2],
   ];
 
   const all = [];
