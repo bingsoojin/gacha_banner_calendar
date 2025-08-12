@@ -1,377 +1,169 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- THEME: variables + light/dark palettes -->
+  <meta charset="utf-8" />
+  <title>Gacha Banner Calendar</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Luxon (dates/timezones) -->
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+
+  <!-- DARK MODE PRE-INIT: set .dark before paint -->
+  <script>
+  (function(){
+    try{
+      const saved  = localStorage.getItem('theme');
+      const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if ((saved || system) === 'dark') document.documentElement.classList.add('dark');
+    }catch(e){}
+  })();
+  </script>
+
+  <!-- THEME: variables + overrides (placed after any other styles) -->
   <style>
     :root{
       --bg:#ffffff; --text:#0f172a; --muted:#475569;
       --card:#f8fafc; --border:#e2e8f0; --chip:#e2e8f0; --accent:#2563eb;
+      --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
     }
     .dark{
+      color-scheme: dark;
       --bg:#0b1120; --text:#e5e7eb; --muted:#94a3b8;
       --card:#0f172a; --border:#1f2937; --chip:#111827; --accent:#60a5fa;
+      --ok:#34d399; --warn:#fbbf24; --danger:#f87171;
     }
-    html,body{ background:var(--bg); color:var(--text); }
-    a{ color:var(--accent); }
-    hr{ border-color:var(--border); }
-    .card{ background:var(--card); border:1px solid var(--border); }
-    .chip{ background:var(--chip); border:1px solid var(--border); }
+    html, body { background:var(--bg) !important; color:var(--text) !important; margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    a { color:var(--accent) !important; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px 20px 48px; }
+    .toolbar { display:flex; align-items:center; gap:10px; justify-content:space-between; }
+    .toolbar-left { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .toolbar-right { display:flex; align-items:center; gap:8px; }
+
+    .btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 10px; cursor: pointer;
+    }
+    .btn:disabled { opacity: .6; cursor: default; }
+    .seg { display:inline-flex; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .seg button { background:var(--card); color:var(--text); padding:8px 12px; border:0; cursor:pointer; }
+    .seg button[aria-pressed="true"] { background:var(--chip); font-weight:600; }
     .theme-toggle{
-      position:fixed; top:12px; right:12px; z-index:1000;
       border:1px solid var(--border); background:var(--card); color:var(--text);
       border-radius:9999px; padding:8px 10px; cursor:pointer; line-height:1;
     }
-    .theme-toggle:focus{ outline:2px solid var(--accent); outline-offset:2px; }
-  </style>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gacha Banner Calendars</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] }
-        }
-      }
+    .title { font-weight:800; letter-spacing:.2px; }
+    .subtle { color:var(--muted); font-size:13px; }
+
+    /* Month grid */
+    .month-head { display:flex; align-items:center; gap:10px; margin-top:14px; margin-bottom:8px; }
+    .month-head .spacer { flex:1; }
+    .month { border:1px solid var(--border); border-radius:14px; overflow:hidden; background:var(--card); }
+    .dow { display:grid; grid-template-columns: repeat(7, 1fr); gap:1px; background:var(--border); }
+    .dow div { background:var(--card); text-align:center; padding:8px 0; font-size:12px; color:var(--muted); }
+    .grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:1px; background:var(--border); }
+    .cell { background:var(--card); min-height:104px; padding:8px; position:relative; }
+    .daynum { font-size:12px; color:var(--muted); }
+    .cell.today .daynum { color: var(--accent); font-weight:700; }
+    .chip {
+      display:inline-block; margin:4px 0 0; padding:4px 6px; font-size:12px;
+      border-radius:8px; background:var(--chip); border:1px solid var(--border); color:var(--text);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
     }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
-  <style>
-    .chip { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .scrollbar-thin::-webkit-scrollbar{height:6px;width:6px}
-    .scrollbar-thin::-webkit-scrollbar-thumb{background-color:#cbd5e1;border-radius:8px}
+    .chip .g { font-weight:600; }
+    .chip .t { color:var(--muted); font-weight:600; margin-left:6px; }
+    .chip .tag { margin-left:6px; font-size:10px; padding:2px 6px; border-radius:999px; border:1px solid var(--border); background:transparent; }
+    .pill-ok   { border-color: var(--ok);   color: var(--ok); }
+    .pill-warn { border-color: var(--warn); color: var(--warn); }
+    .pill-neu  { border-color: var(--muted); color: var(--muted); }
+    .pill-zzzw { border-color: var(--accent); color: var(--accent); }
+
+    /* Upcoming/List */
+    .list { margin-top:16px; display:grid; gap:8px; }
+    .row {
+      display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:var(--card);
+    }
+    .row .when { min-width: 220px; color:var(--muted); font-size:13px; }
+    .row .who  { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .row .who .name { font-weight:600; }
+    .row .meta { display:flex; gap:6px; align-items:center; }
+    .row .meta .tag { font-size:10px; padding:2px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted); }
+
+    footer { margin-top:26px; padding-top:14px; border-top:1px solid var(--border); color:var(--muted); font-size:13px; }
+
+    /* Simple hide helper */
+    .hidden { display:none !important; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
-  <!-- THEME: dark mode toggle -->
-  <button id="btnDark" class="theme-toggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
-  <header class="sticky top-0 z-10 bg-white border-b border-slate-200/70">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap items-center gap-3">
-      <h1 class="text-2xl font-bold">Gacha Banner Calendars</h1>
-      <span id="nowTZ" class="ml-auto text-sm text-slate-500"></span>
+
+<body>
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div>
+          <div class="title">Gacha Banner Calendar</div>
+          <div class="subtle">Auto-updated nightly · times shown in your timezone</div>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <div class="seg" role="tablist" aria-label="View">
+          <button id="btnMonth" aria-pressed="true">Month</button>
+          <button id="btnUpcoming" aria-pressed="false">Upcoming</button>
+        </div>
+        <button id="btnExport" class="btn" title="Export visible range as .ics">Export .ics</button>
+        <button id="btnDark" class="theme-toggle" aria-pressed="false" title="Toggle dark mode">🌙</button>
+      </div>
     </div>
-  </header>
 
-  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
-    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
-      <div class="grid md:grid-cols-4 gap-4">
-        <div>
-          <div class="text-sm font-semibold mb-2">Games</div>
-          <div id="gameFilters" class="flex flex-wrap gap-2"></div>
-        </div>
-        <div>
-          <div class="text-sm font-semibold mb-2">View</div>
-          <div class="inline-flex rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <button id="btnMonth" class="px-3 py-2 text-sm font-medium bg-white hover:bg-slate-50">Month</button>
-            <button id="btnList" class="px-3 py-2 text-sm font-medium bg-white hover:bg-slate-50 border-l border-slate-200">Upcoming</button>
-          </div>
-        </div>
-        <div>
-          <div class="text-sm font-semibold mb-2">Timezone</div>
-          <select id="tzSelect" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm"></select>
-        </div>
-        <div class="flex items-end gap-2">
-          <button id="btnToday" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">Today</button>
-          <button id="btnICS" class="px-3 py-2 rounded-xl bg-slate-900 text-white text-sm hover:opacity-90">Export .ics</button>
-          <a href="https://github.com/" target="_blank" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">Repo</a>
-        </div>
+    <!-- Month view -->
+    <div id="monthView" class="month-view">
+      <div class="month-head">
+        <button id="btnPrev" class="btn" title="Previous month">←</button>
+        <div id="monthLabel" style="font-weight:700;"></div>
+        <div class="spacer"></div>
+        <button id="btnNext" class="btn" title="Next month">→</button>
       </div>
-    </section>
-
-    <section id="monthNav" class="bg-white rounded-2xl shadow-sm border border-slate-200 px-4 py-3 flex items-center gap-3">
-      <button id="prevMonth" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">←</button>
-      <div id="monthTitle" class="text-lg font-semibold"></div>
-      <button id="nextMonth" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm hover:bg-slate-50">→</button>
-      <div class="ml-auto text-sm text-slate-500">Showing overlapping banners for selected games</div>
-    </section>
-
-    <section id="monthView" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 hidden">
-      <div class="grid grid-cols-7 text-xs font-semibold text-slate-500 mb-2">
-        <div class="p-2">Mon</div><div class="p-2">Tue</div><div class="p-2">Wed</div>
-        <div class="p-2">Thu</div><div class="p-2">Fri</div><div class="p-2">Sat</div><div class="p-2">Sun</div>
+      <div class="month">
+        <div class="dow">
+          <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+        </div>
+        <div id="monthGrid" class="grid"></div>
       </div>
-      <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
-    </section>
+    </div>
 
-    <section id="listView" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 hidden">
-      <div id="liveNow" class="mb-4"></div>
-      <div id="upcomingList" class="divide-y divide-slate-200"></div>
-    </section>
+    <!-- Upcoming view -->
+    <div id="listView" class="hidden">
+      <div id="liveNow" class="list"></div>
+      <h3 style="margin:18px 0 8px;">Upcoming</h3>
+      <div id="upcomingList" class="list"></div>
+    </div>
 
-    <footer class="text-center text-xs text-slate-500 py-8">
-      Built for HSR · ZZZ · Genshin · Wuthering Waves · Girls' Frontline 2
+    <footer id="footer">
+      Built for: Honkai: Star Rail • Zenless Zone Zero • <strong>Genshin Impact</strong> • Wuthering Waves • Girls’ Frontline 2
+      <div style="margin-top:6px;">Data source credits shown per entry (hover for tooltip).</div>
     </footer>
-  </main>
+  </div>
 
   <script>
+    // ==== Global state ====
     const { DateTime, Interval } = luxon;
 
     const GAME_META = {
-      HSR:  { label: 'Honkai: Star Rail',   color: 'bg-indigo-600',  tint: 'bg-indigo-50',  text: 'text-indigo-900',  ring: 'ring-indigo-200' },
-      ZZZ:  { label: 'Zenless Zone Zero',   color: 'bg-emerald-600', tint: 'bg-emerald-50', text: 'text-emerald-900', ring: 'ring-emerald-200' },
-      GI:   { label: 'Genshin Impact',      color: 'bg-sky-600',     tint: 'bg-sky-50',     text: 'text-sky-900',     ring: 'ring-sky-200' },
-      WUWA: { label: 'Wuthering Waves',     color: 'bg-rose-600',    tint: 'bg-rose-50',    text: 'text-rose-900',    ring: 'ring-rose-200' },
-      GF2:  { label: 'Girls’ Frontline 2',  color: 'bg-amber-600',   tint: 'bg-amber-50',   text: 'text-amber-900',   ring: 'ring-amber-200' },
+      HSR:  { label: 'Honkai: Star Rail' },
+      ZZZ:  { label: 'Zenless Zone Zero' },
+      GI:   { label: 'Genshin Impact' }, // ensure full name everywhere
+      WUWA: { label: 'Wuthering Waves' },
+      GF2:  { label: "Girls’ Frontline 2" }
     };
 
-    let DATA = [];
     const state = {
+      tz: DateTime.local().zoneName,
       view: 'month',
-      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Australia/Brisbane',
-      monthCursor: DateTime.now(),
-      gameFilter: new Set(Object.keys(GAME_META)),
+      monthCursor: DateTime.local().startOf('month'),
+      data: []
     };
 
-    const el = {
-      gameFilters: document.getElementById('gameFilters'),
-      btnMonth: document.getElementById('btnMonth'),
-      btnList: document.getElementById('btnList'),
-      tzSelect: document.getElementById('tzSelect'),
-      nowTZ: document.getElementById('nowTZ'),
-      monthNav: document.getElementById('monthNav'),
-      monthView: document.getElementById('monthView'),
-      listView: document.getElementById('listView'),
-      monthTitle: document.getElementById('monthTitle'),
-      prevMonth: document.getElementById('prevMonth'),
-      nextMonth: document.getElementById('nextMonth'),
-      calendarGrid: document.getElementById('calendarGrid'),
-      upcomingList: document.getElementById('upcomingList'),
-      liveNow: document.getElementById('liveNow'),
-      btnToday: document.getElementById('btnToday'),
-      btnICS: document.getElementById('btnICS'),
-    };
-
-    init();
-    async function init(){
-      buildTZSelect();
-      el.tzSelect.value = state.tz;
-      el.tzSelect.onchange = ()=>{ state.tz = el.tzSelect.value; render(); };
-      el.btnMonth.onclick = ()=>{ state.view='month'; render(); };
-      el.btnList.onclick  = ()=>{ state.view='list';  render(); };
-      el.prevMonth.onclick = ()=>{ state.monthCursor = state.monthCursor.minus({months:1}); renderMonth(); };
-      el.nextMonth.onclick = ()=>{ state.monthCursor = state.monthCursor.plus({months:1});  renderMonth(); };
-      el.btnToday.onclick  = ()=>{ state.monthCursor = DateTime.now(); render(); };
-      el.btnICS.onclick = exportICS;
-
-      el.gameFilters.innerHTML = Object.entries(GAME_META).map(([k,meta]) => `
-        <label class="inline-flex items-center gap-2 px-2 py-1 rounded-xl border border-slate-200 cursor-pointer ${state.gameFilter.has(k)? 'bg-white' : 'bg-slate-50 opacity-70'}">
-          <input type="checkbox" data-game="${k}" ${state.gameFilter.has(k)?'checked':''} class="accent-slate-900">
-          <span class="text-sm">${meta.label}</span>
-          <span class="ml-1 rounded-full ${meta.color} w-2.5 h-2.5 inline-block"></span>
-        </label>
-      `).join('');
-      el.gameFilters.querySelectorAll('input[type=checkbox]').forEach(cb=>{
-        cb.addEventListener('change', e=>{
-          const g = e.target.getAttribute('data-game');
-          if(e.target.checked) state.gameFilter.add(g); else state.gameFilter.delete(g);
-          render();
-        });
-      });
-
-      setInterval(()=> el.nowTZ.textContent = `Now: ${DateTime.now().setZone(state.tz).toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})`, 1000);
-
-      try {
-        const resp = await fetch('banners.json', { cache: 'no-cache' });
-        DATA = await resp.json();
-      } catch(e) {
-        DATA = [];
-      }
-      render();
-    }
-
-    function buildTZSelect(){
-      const zones = (Intl.supportedValuesOf && Intl.supportedValuesOf('timeZone')) || [
-        'UTC','Australia/Brisbane','Australia/Sydney','Asia/Shanghai','Asia/Tokyo','Europe/London','Europe/Paris','America/Los_Angeles','America/New_York'
-      ];
-      el.tzSelect.innerHTML = zones.map(z=>`<option value="${z}">${z}</option>`).join('');
-    }
-
-    function render(){
-      el.btnMonth.classList.toggle('bg-slate-900', state.view==='month');
-      el.btnMonth.classList.toggle('text-white', state.view==='month');
-      el.btnList.classList.toggle('bg-slate-900', state.view==='list');
-      el.btnList.classList.toggle('text-white', state.view==='list');
-      el.monthView.classList.toggle('hidden', state.view!=='month');
-      el.monthNav.classList.toggle('hidden', state.view!=='month');
-      el.listView.classList.toggle('hidden', state.view!=='list');
-      if(state.view==='month') renderMonth(); else renderList();
-    }
-
-    function visibleBanners(){
-      const selected = DATA.filter(d => state.gameFilter.has(d.game));
-      return selected.map(d => ({
-        ...d,
-        start: DateTime.fromISO(d.start, {zone:'utc'}),
-        end:   DateTime.fromISO(d.end,   {zone:'utc'}),
-      }));
-    }
-
-    function renderMonth(){
-      const monthStart = state.monthCursor.setZone(state.tz).startOf('month');
-      const mondayStart = monthStart.minus({days: (monthStart.weekday + 6) % 7});
-      const gridStart = mondayStart;
-      const gridCells = 42;
-      el.monthTitle.textContent = monthStart.toFormat('MMMM yyyy');
-      el.calendarGrid.innerHTML = '';
-
-      const banners = visibleBanners();
-      for(let i=0;i<gridCells;i++){
-        const day = gridStart.plus({days:i});
-        const inMonth = day.hasSame(monthStart, 'month');
-        // Compare in the viewer's timezone to avoid off-by-one
-        const cellStart = day.startOf('day');      // local
-        const cellEnd   = day.endOf('day');        // local
-
-        const matches = banners.filter(b => {
-          const s = b.start.setZone(state.tz).startOf('day');
-          const e = b.end.setZone(state.tz).endOf('day');
-          const iv = Interval.fromDateTimes(s, e);                 // local interval
-          const cell = Interval.fromDateTimes(cellStart, cellEnd); // local day
-          return iv.overlaps(cell);
-        });
-
-        const cell = document.createElement('div');
-        cell.className = `min-h-28 border border-slate-200 rounded-xl p-2 flex flex-col gap-1 ${inMonth?'bg-white':'bg-slate-50'}`;
-
-        const dayHdr = document.createElement('div');
-        dayHdr.className = 'text-xs font-semibold text-slate-500';
-        dayHdr.textContent = day.toFormat('d');
-        cell.appendChild(dayHdr);
-
-        const wrap = document.createElement('div');
-        wrap.className = 'flex flex-col gap-1 overflow-y-auto scrollbar-thin';
-        matches.slice(0,4).forEach(b=>{
-          const meta = GAME_META[b.game];
-          const chip = document.createElement('div');
-          chip.className = `chip text-[11px] ${meta.tint} ${meta.text} px-2 py-1 rounded-lg border ${meta.ring}`;
-          const localStart = b.start.setZone(state.tz).toFormat('dd LLL HH:mm');
-          const localEnd = b.end.setZone(state.tz).toFormat('dd LLL HH:mm');
-          const vpf = (b.version ? ` v${b.version}` : '') + (b.phase_num ? ` P${b.phase_num}` : '');
-          const rr = b.rerun ? ' [Rerun]' : '';
-          chip.title = `${GAME_META[b.game].label}\n${b.name}${rr}${vpf}\n${localStart} → ${localEnd}`;
-          chip.innerHTML = `<span class="mr-1 inline-block w-1.5 h-1.5 rounded-full ${meta.color}"></span>${b.game} • ${b.name}`;
-          wrap.appendChild(chip);
-        });
-        if(matches.length>4){
-          const more = document.createElement('div');
-          more.className = 'text-[11px] text-slate-500';
-          more.textContent = `+${matches.length-4} more`;
-          wrap.appendChild(more);
-        }
-        cell.appendChild(wrap);
-        el.calendarGrid.appendChild(cell);
-      }
-    }
-
-    function renderList(){
-      const banners = visibleBanners().sort((a,b)=> a.start - b.start);
-      const now = DateTime.now();
-      const live = banners.filter(b => now >= b.start && now <= b.end);
-      const upcoming = banners.filter(b => b.start >= now).slice(0, 50);
-
-      if(live.length){
-        el.liveNow.innerHTML = `
-          <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-3">
-            <div class="text-sm font-semibold text-emerald-900 mb-2">Live now (${live.length})</div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-              ${live.map(rowCard).join('')}
-            </div>
-          </div>`;
-      }else{
-        el.liveNow.innerHTML = '';
-      }
-      el.upcomingList.innerHTML = upcoming.map(itemRow).join('');
-
-      function progressPct(b){
-        const total = b.end - b.start;
-        const done = Math.min(Math.max(DateTime.now() - b.start, 0), total);
-        return Math.round((done/total)*100);
-      }
-      function rowCard(b){
-        const meta = GAME_META[b.game];
-        const s = b.start.setZone(state.tz);
-        const e = b.end.setZone(state.tz);
-        const pct = progressPct(b);
-        return `
-          <div class="rounded-xl border ${meta.ring} p-3 ${meta.tint}">
-            <div class="flex items-center gap-2 text-sm font-semibold ${meta.text}">
-              <span class="inline-block w-2.5 h-2.5 rounded-full ${meta.color}"></span>
-              ${meta.label}
-              <span class="text-slate-500 font-normal">•</span>
-              <span class="${meta.text}">${b.name}</span>
-            </div>
-            <div class="text-xs text-slate-600 mt-1">${s.toFormat("dd LLL HH:mm")} → ${e.toFormat("dd LLL HH:mm")} (${state.tz})</div>
-            <div class="mt-2 h-2 bg-white/60 rounded-full overflow-hidden">
-              <div class="h-2 ${meta.color}" style="width:${pct}%;"></div>
-            </div>
-          </div>`;
-      }
-      function itemRow(b){
-        const meta = GAME_META[b.game];
-        const s = b.start.setZone(state.tz);
-        const e = b.end.setZone(state.tz);
-        const link = b.source ? `<a class="ml-1 underline text-slate-500" href="${b.source}" target="_blank" rel="noopener">source</a>` : '';
-        return `
-          <div class="py-3 flex flex-col gap-1">
-            <div class="flex items-center gap-2 text-sm font-semibold">
-              <span>${meta.label}</span>
-                <span class="text-slate-500">•</span>
-                <span>${b.name}</span>
-                ${b.rerun ? '<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">Rerun</span>' : ''}
-                ${b.version ? `<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">v${b.version}${b.phase_num?` P${b.phase_num}`:''}</span>` : ''}
-                ${b.banner_type==='Light Cone' ? '<span class="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-slate-200">LC</span>' : ''}
-            </div>
-            <div class="text-xs text-slate-600">${s.toFormat("ccc, dd LLL yyyy • HH:mm")} → ${e.toFormat("ccc, dd LLL yyyy • HH:mm")} (${state.tz})</div>
-            ${b.notes?`<div class="text-xs text-slate-500">Notes: ${String(b.notes).replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}</div>`:''}
-          </div>`;
-      }
-    }
-
-    function exportICS(){
-      const banners = visibleBanners();
-      const nowUTC = DateTime.utc().toFormat("yyyyMMdd'T'HHmmss'Z'");
-      const fmt = dt => DateTime.fromJSDate(dt.toJSDate()).toUTC().toFormat("yyyyMMdd'T'HHmmss'Z'");
-      let set = [];
-      if(state.view==='month'){
-        const mStart = state.monthCursor.setZone(state.tz).startOf('month').toUTC();
-        const mEnd   = state.monthCursor.setZone(state.tz).endOf('month').toUTC();
-        set = banners.filter(b => Interval.fromDateTimes(b.start, b.end).overlaps(Interval.fromDateTimes(mStart, mEnd)));
-      }else{
-        const now = DateTime.now();
-        set = banners.filter(b => b.end > now);
-      }
-      const lines = [
-        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BannerCal//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
-      ];
-      set.forEach((b,i)=>{
-        const meta = GAME_META[b.game];
-        const uid = `${b.game}-${i}-${b.start.toMillis()}@bannercal`;
-        lines.push(
-          "BEGIN:VEVENT",
-          `UID:${uid}`,
-          `DTSTAMP:${nowUTC}`,
-          `DTSTART;VALUE=DATE:${b.start.setZone(state.tz).startOf('day').toFormat('yyyyMMdd')}`,
-          `DTEND;VALUE=DATE:${b.end.setZone(state.tz).plus({ days: 1 }).startOf('day').toFormat('yyyyMMdd')}`,
-          `SUMMARY:${(meta.label + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
-          `DESCRIPTION:${((b.phase?('Phase '+b.phase+' \n'):'') + (b.notes||'')).replace(/[\n,;]/g, ' ')}`,
-          "END:VEVENT"
-        );
-      });
-      lines.push("END:VCALENDAR");
-      const blob = new Blob([lines.join("\r\n")], {type:'text/calendar;charset=utf-8'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `banner-cal-${state.view==='month'?state.monthCursor.toFormat("yyyy-LL"):'upcoming'}.ics`;
-      document.body.appendChild(a); a.click();
-      setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
-    }
-  </script>
-
-  <!-- DROP-IN 3: theme + footer logic -->
-  <script>
+    // ==== Theme (runtime) ====
     const THEME_KEY = 'theme';
     function applyTheme(mode){
       const isDark = mode === 'dark';
@@ -392,18 +184,235 @@
       applyTheme(isDark ? 'dark' : 'light');
       localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
     }
-    document.addEventListener('DOMContentLoaded', ()=>{
-      initTheme();
-      const btn = document.getElementById('btnDark');
-      if(btn) btn.addEventListener('click', toggleTheme);
 
-      // Ensure "Genshin Impact" wording in footer and labels
-      document.querySelectorAll('footer, .footer, #footer').forEach(el=>{
-        el.innerHTML = el.innerHTML.replace(/Genshin(?!\s*Impact)/g, 'Genshin Impact');
-      });
-      if (window.GAME_META && window.GAME_META.GI) {
-        window.GAME_META.GI.label = 'Genshin Impact';
+    // ==== Data load ====
+    async function loadData(){
+      try {
+        const resp = await fetch('banners.json?t=' + Date.now(), { cache: 'no-cache' });
+        const raw = await resp.text();
+        let parsed = null;
+        try { parsed = JSON.parse(raw); } catch {}
+        if (typeof parsed === 'string') { try { parsed = JSON.parse(parsed); } catch { parsed = null; } }
+        if (!Array.isArray(parsed)) parsed = [];
+        state.data = parsed.map(x => ({
+          ...x,
+          start: DateTime.fromISO(x.start, { zone: 'utc' }),
+          end:   DateTime.fromISO(x.end,   { zone: 'utc' })
+        }));
+      } catch {
+        state.data = [];
       }
+    }
+
+    function visibleBanners(){
+      // Basic filter: all games; extend with toggles later if needed
+      return state.data;
+    }
+
+    // ==== Rendering ====
+    function render(){
+      document.getElementById('btnMonth').setAttribute('aria-pressed', String(state.view==='month'));
+      document.getElementById('btnUpcoming').setAttribute('aria-pressed', String(state.view==='upcoming'));
+      document.getElementById('monthView').classList.toggle('hidden', state.view!=='month');
+      document.getElementById('listView').classList.toggle('hidden', state.view!=='upcoming');
+      if(state.view==='month') renderMonth(); else renderUpcoming();
+    }
+
+    function renderMonth(){
+      const label = state.monthCursor.toFormat('MMMM yyyy');
+      document.getElementById('monthLabel').textContent = label;
+
+      const grid = document.getElementById('monthGrid');
+      grid.innerHTML = '';
+
+      // Start Monday; compute first cell
+      const startOfMonth = state.monthCursor.startOf('month');
+      const startWeekday = (startOfMonth.weekday + 6) % 7; // 0=Mon .. 6=Sun
+      const firstCellDate = startOfMonth.minus({ days: startWeekday });
+
+      const banners = visibleBanners();
+
+      for(let i=0;i<42;i++){
+        const day = firstCellDate.plus({ days:i }).setZone(state.tz);
+        const cell = document.createElement('div');
+        cell.className = 'cell' + (day.hasSame(DateTime.local(), 'day') ? ' today' : '');
+
+        const dn = document.createElement('div');
+        dn.className = 'daynum';
+        dn.textContent = day.toFormat('d');
+        cell.appendChild(dn);
+
+        // Local-day overlap: avoid off-by-one
+        const cellStart = day.startOf('day');
+        const cellEnd   = day.endOf('day');
+
+        const matches = banners.filter(b => {
+          const s = b.start.setZone(state.tz).startOf('day');
+          const e = b.end.setZone(state.tz).endOf('day');
+          return Interval.fromDateTimes(s, e).overlaps(Interval.fromDateTimes(cellStart, cellEnd));
+        });
+
+        for(const b of matches){
+          const chip = document.createElement('div');
+          chip.className = 'chip';
+          chip.title = tooltipFor(b);
+
+          const meta = GAME_META[b.game] || { label: b.game };
+          chip.innerHTML = `<span class="g">${meta.label}</span><span class="t">•</span> ${escapeHtml(b.name)} ${tagsHTML(b)}`;
+          cell.appendChild(chip);
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+
+    function renderUpcoming(){
+      const now = DateTime.now();
+      const banners = visibleBanners();
+      const live = banners.filter(b => b.start <= now && b.end >= now)
+                          .sort((a,b)=> a.end - b.end);
+      const future = banners.filter(b => b.start > now)
+                            .sort((a,b)=> a.start - b.start);
+
+      const elLive = document.getElementById('liveNow');
+      const elUp   = document.getElementById('upcomingList');
+      elLive.innerHTML = ''; elUp.innerHTML = '';
+
+      if(live.length===0){
+        const empty = document.createElement('div');
+        empty.className = 'row';
+        empty.innerHTML = `<div class="when">Now</div><div class="who">No banners live.</div>`;
+        elLive.appendChild(empty);
+      }else{
+        for(const b of live.slice(0, 10)){
+          elLive.appendChild(rowItem(b, true));
+        }
+      }
+      for(const b of future.slice(0, 40)){
+        elUp.appendChild(rowItem(b, false));
+      }
+    }
+
+    function rowItem(b, isLive){
+      const r = document.createElement('div');
+      r.className = 'row'; r.title = tooltipFor(b);
+
+      const sLocal = b.start.setZone(state.tz).toFormat('LLL d');
+      const eLocal = b.end.setZone(state.tz).toFormat('LLL d');
+      const when = document.createElement('div');
+      when.className = 'when';
+      when.textContent = isLive ? `Live • ends ${eLocal}` : `${sLocal} → ${eLocal}`;
+
+      const who = document.createElement('div');
+      who.className = 'who';
+      const meta = GAME_META[b.game] || { label: b.game };
+      who.innerHTML = `<span class="name">${meta.label} • ${escapeHtml(b.name)}</span> ${tagsHTML(b)}`;
+
+      const metaBox = document.createElement('div');
+      metaBox.className = 'meta';
+      if (b.status){
+        const st = document.createElement('span');
+        st.className = 'tag ' + (b.status==='current' ? 'pill-ok' : b.status==='upcoming' ? 'pill-warn' : 'pill-neu');
+        st.textContent = b.status[0].toUpperCase() + b.status.slice(1);
+        metaBox.appendChild(st);
+      }
+      const link = document.createElement('a');
+      link.href = b.source || '#';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'tag';
+      link.textContent = 'Source';
+      metaBox.appendChild(link);
+
+      r.appendChild(when);
+      r.appendChild(who);
+      r.appendChild(metaBox);
+      return r;
+    }
+
+    function tagsHTML(b){
+      const tags = [];
+      if (b.version) tags.push(`<span class="tag">v${escapeHtml(b.version)}${b.phase_num?` P${b.phase_num}`:''}</span>`);
+      if (b.rerun)   tags.push(`<span class="tag">Rerun</span>`);
+      if (b.banner_type === 'Light Cone') tags.push(`<span class="tag">LC</span>`);
+      if (b.banner_type === 'W-Engine')   tags.push(`<span class="tag pill-zzzw">W-Engine</span>`);
+      return tags.join(' ');
+    }
+
+    function tooltipFor(b){
+      const meta = GAME_META[b.game] || { label: b.game };
+      const localStart = b.start.setZone(state.tz).toFormat('DDDD');
+      const localEnd   = b.end.setZone(state.tz).toFormat('DDDD');
+      const vpf = (b.version ? ` v${b.version}` : '') + (b.phase_num ? ` P${b.phase_num}` : '');
+      const rr  = b.rerun ? ' [Rerun]' : '';
+      return `${meta.label}\n${b.name}${rr}${vpf}\n${localStart} → ${localEnd}`;
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // ==== ICS export (all-day) ====
+    function exportICS(){
+      const banners = visibleBanners();
+      const nowUTC = DateTime.utc().toFormat("yyyyMMdd'T'HHmmss'Z'");
+      let set = [];
+      if(state.view==='month'){
+        const mStart = state.monthCursor.setZone(state.tz).startOf('month');
+        const mEnd   = state.monthCursor.setZone(state.tz).endOf('month');
+        set = banners.filter(b => {
+          const iv = Interval.fromDateTimes(
+            b.start.setZone(state.tz).startOf('day'),
+            b.end.setZone(state.tz).endOf('day')
+          );
+          const cell = Interval.fromDateTimes(mStart, mEnd);
+          return iv.overlaps(cell);
+        });
+      }else{
+        const now = DateTime.now();
+        set = banners.filter(b => b.end > now);
+      }
+      const lines = [
+        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BannerCal//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+      ];
+      set.forEach((b,i)=>{
+        const meta = GAME_META[b.game] || { label: b.game };
+        const uid = `${b.game}-${i}-${b.start.toMillis()}@bannercal`;
+        lines.push(
+          "BEGIN:VEVENT",
+          `UID:${uid}`,
+          `DTSTAMP:${nowUTC}`,
+          // All-day ICS: local start date, end exclusive (+1 day)
+          `DTSTART;VALUE=DATE:${b.start.setZone(state.tz).startOf('day').toFormat('yyyyMMdd')}`,
+          `DTEND;VALUE=DATE:${b.end.setZone(state.tz).plus({ days: 1 }).startOf('day').toFormat('yyyyMMdd')}`,
+          `SUMMARY:${(meta.label + ' • ' + b.name).replace(/[\n,;]/g, ' ')}`,
+          `DESCRIPTION:${((b.phase?('Phase '+b.phase+' \n'):'') + (b.notes||'')).replace(/[\n,;]/g, ' ')}`,
+          "END:VEVENT"
+        );
+      });
+      lines.push("END:VCALENDAR");
+      const blob = new Blob([lines.join("\r\n")], {type:'text/calendar;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `banner-cal-${state.view==='month'?state.monthCursor.toFormat("yyyy-LL"):'upcoming'}.ics`;
+      document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    }
+
+    // ==== Init / events ====
+    document.addEventListener('DOMContentLoaded', async ()=>{
+      initTheme();
+
+      // Controls
+      document.getElementById('btnDark').addEventListener('click', toggleTheme);
+      document.getElementById('btnMonth').addEventListener('click', ()=>{ state.view='month'; render(); });
+      document.getElementById('btnUpcoming').addEventListener('click', ()=>{ state.view='upcoming'; render(); });
+      document.getElementById('btnPrev').addEventListener('click', ()=>{ state.monthCursor = state.monthCursor.minus({ months:1 }); render(); });
+      document.getElementById('btnNext').addEventListener('click', ()=>{ state.monthCursor = state.monthCursor.plus({ months:1 }); render(); });
+      document.getElementById('btnExport').addEventListener('click', exportICS);
+
+      await loadData();
+      render();
     });
   </script>
 </body>
