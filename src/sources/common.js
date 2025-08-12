@@ -1,4 +1,3 @@
-// src/sources/common.js
 import * as cheerio from 'cheerio';
 import { DateTime } from 'luxon';
 
@@ -6,7 +5,6 @@ import { DateTime } from 'luxon';
 export async function fetchDoc(url){
   const res = await fetch(url, {
     headers: {
-      // Realistic desktop UA helps avoid anti-bot fallbacks
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
       'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'accept-language': 'en-US,en;q=0.9',
@@ -17,17 +15,19 @@ export async function fetchDoc(url){
   if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   const html = await res.text();
   const $ = cheerio.load(html);
-  const pageText = $.root().text();
-  // Lightweight diagnostics: don’t fail, just warn once per page
-  const hasHSRMarkers = /HSR All Warp Banner Dates List|Honkai Star Rail Warp Banner Dates/i.test(pageText);
-  if(!hasHSRMarkers){
-    console.warn('[fetchDoc] expected HSR markers not found; length=', html.length, 'url=', url);
-  }
   return { $, html };
 }
 
 export function normalize(text){
   return (text || '').replace(/\s+/g, ' ').replace(/[\u2013\u2014]/g, '-').trim();
+}
+
+function parseMDY(s, zone){
+  // try long month (August) then short month (Aug)
+  const a = DateTime.fromFormat(s, 'LLLL d, yyyy', { zone });
+  if (a.isValid) return a;
+  const b = DateTime.fromFormat(s, 'LLL d, yyyy', { zone });
+  return b;
 }
 
 /** Flexible date range parser covering:
@@ -39,21 +39,21 @@ export function extractDateRanges(text, zone='UTC'){
   const t = normalize(text);
   const out = [];
 
-  // 1) Full month names/abbreviations with years on both sides
+  // 1) Month name/abbr on both sides
   const reFull = /([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})\s*(?:-|to)\s*([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})/g;
   for(let m; (m = reFull.exec(t)); ){
-    const S = DateTime.fromFormat(m[1].replace('.',''), 'LLLL d, yyyy', { zone });
-    const E = DateTime.fromFormat(m[2].replace('.',''), 'LLLL d, yyyy', { zone });
+    const S = parseMDY(m[1].replace('.',''), zone);
+    const E = parseMDY(m[2].replace('.',''), zone);
     if(S.isValid && E.isValid) out.push(_mkRange(S,E,zone));
   }
 
-  // 2) First date missing year (e.g., "Aug. 12 - Sep. 02, 2025")
+  // 2) Left date missing year (e.g., "Aug. 12 - Sep. 02, 2025")
   const reHalf = /([A-Z][a-z]{2,}\.?\s+\d{1,2})(?:,\s*(\d{4}))?\s*(?:-|to)\s*([A-Z][a-z]{2,}\.?\s+\d{1,2},\s*\d{4})/g;
   for(let m; (m = reHalf.exec(t)); ){
     const right = m[3].replace('.','');
-    const E = DateTime.fromFormat(right, 'LLLL d, yyyy', { zone });
+    const E = parseMDY(right, zone);
     const year = m[2] || (E.isValid ? E.year : undefined);
-    const S = DateTime.fromFormat(`${m[1].replace('.','')}, ${year}`, 'LLLL d, yyyy', { zone });
+    const S = parseMDY(`${m[1].replace('.','')}, ${year}`, zone);
     if(S.isValid && E.isValid) out.push(_mkRange(S,E,zone));
   }
 
@@ -65,7 +65,6 @@ export function extractDateRanges(text, zone='UTC'){
     const E = DateTime.fromObject({ year: y2, month: m2, day: d2 }, { zone });
     if(S.isValid && E.isValid) out.push(_mkRange(S,E,zone));
   }
-
   return out;
 }
 
@@ -79,10 +78,8 @@ function _mkRange(start, end, zone){
   };
 }
 
-// src/sources/common.js
-export function rec(fields){
-  const { game, name, phase='—', startUTC, endUTC, source, notes='', ...extra } = fields;
+/** Create a normalized record used by all scrapers */
+export function rec({game, name, phase='—', startUTC, endUTC, source, notes='', ...extra}) {
   if(!game || !name || !startUTC || !endUTC) return null;
   return { game, name: String(name).trim(), phase, start: startUTC, end: endUTC, source, notes, ...extra };
 }
-
