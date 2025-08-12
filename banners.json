@@ -91,6 +91,50 @@
     "notes": "UTC-5 per server schedules"
   },
   {
+    "game": "ZZZ",
+    "name": "ZZZ Banner Schedule Alice",
+    "phase": "—",
+    "start": "2025-08-06T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "ZZZ Banner Schedule (Game8)",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Dazzling Choir",
+    "phase": "—",
+    "start": "2025-08-06T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "ZZZ Banner Schedule (Game8)",
+    "banner_type": "W-Engine",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Yanagi",
+    "phase": "—",
+    "start": "2025-08-06T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "ZZZ Banner Schedule (Game8)",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Dazzling Melody",
+    "phase": "—",
+    "start": "2025-08-06T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "ZZZ Banner Schedule (Game8)",
+    "banner_type": "W-Engine",
+    "rerun": false
+  },
+  {
     "game": "HSR",
     "name": "Hysilens",
     "phase": "1",
