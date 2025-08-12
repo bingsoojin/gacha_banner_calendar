@@ -2,20 +2,25 @@ name: Nightly Banner Scrape
 
 on:
   schedule:
-    - cron: "0 16 * * *"   # 02:00 AEST
+    - cron: "0 16 * * *"   # 02:00 AEST (Brisbane) = 16:00 UTC
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
+concurrency:
+  group: scrape-banners
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # ⬇️ remove "cache: 'npm'" because it requires a lockfile
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -28,9 +33,19 @@ jobs:
           echo "== repo root after build =="
           ls -lah
 
+      - name: Verify banners.json
+        run: |
+          test -f banners.json || { echo "banners.json not found"; exit 1; }
+          echo "banners.json size: $(wc -c < banners.json) bytes"
+          sed -n '1,30p' banners.json | sed -e 's/^/│ /'
 
-      - name: Build (scrape -> banners.json)
-        run: npm run build
+      - name: Upload banners.json (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: banners.json
+          path: banners.json
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Commit and push if changed
         run: |
