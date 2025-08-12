@@ -49,16 +49,13 @@ async function main() {
 
   writeFileSync(OUT, JSON.stringify(merged, null, 2) + '\n', 'utf8');
 
-  const bySrc = { HSR:0, ZZZ:0, GI:0, WUWA:0, GF2:0 };
-  for (const r of merged) bySrc[r.game] = (bySrc[r.game] || 0) + 1;
-  console.log(`Wrote ${merged.length} records to ${OUT}`, bySrc);
-
-  // Stats + visibility guard
+  // Stats + visibility guard (declare once)
   const bySrc = { HSR: 0, ZZZ: 0, GI: 0, WUWA: 0, GF2: 0 };
   for (const r of merged) bySrc[r.game] = (bySrc[r.game] || 0) + 1;
 
   console.log(`Wrote ${merged.length} records to ${OUT}`, bySrc);
 
+  // Fail only if all three HoYoverse sources are empty
   if ((bySrc.HSR + bySrc.ZZZ + bySrc.GI) === 0) {
     console.error('No HoYoverse banners found (HSR/ZZZ/GI) - failing build for visibility.');
     process.exit(2);
