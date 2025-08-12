@@ -65,7 +65,14 @@ function attachVersionPhase(r, vpMap){
 export async function scrapeHSR(){
   const { $, html } = await fetchDoc(URL);
   const text = normalize($.root().text());
+
+   // Debug markers (always printed; cheap and very useful)
+  const mkDatesList   = /HSR All Warp Banner Dates List/i.test(text);
+  const mkSchedHeader = /Honkai Star Rail Warp Banner Dates/i.test(text);
+  console.log('[HSR] markers', { mkDatesList, mkSchedHeader, textLen: text.length });
+  
   const vpMap = parseVersionPhaseMap(text);
+  console.log('[HSR] version/phase entries:', vpMap.length);
   const reruns = detectReruns(text);
 
   const out = [];
@@ -124,5 +131,6 @@ export async function scrapeHSR(){
     }
   }
 
+  console.log('[HSR] rows produced:', out.length);
   return out;
 }
