@@ -64,8 +64,10 @@ function _mkRange(start, end, zone){
   };
 }
 
-/** Create a normalized record used by all scrapers */
-export function rec({game, name, phase='—', startUTC, endUTC, source, notes=''}) {
+// src/sources/common.js
+export function rec(fields){
+  const { game, name, phase='—', startUTC, endUTC, source, notes='', ...extra } = fields;
   if(!game || !name || !startUTC || !endUTC) return null;
-  return { game, name: String(name).trim(), phase, start: startUTC, end: endUTC, source, notes };
+  return { game, name: String(name).trim(), phase, start: startUTC, end: endUTC, source, notes, ...extra };
 }
+
