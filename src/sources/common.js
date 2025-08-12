@@ -4,10 +4,25 @@ import { DateTime } from 'luxon';
 
 /** Fetch the page and return Cheerio handle + raw HTML */
 export async function fetchDoc(url){
-  const res = await fetch(url, { headers: { 'user-agent': 'banner-cal/1.0 (+github actions)' } });
+  const res = await fetch(url, {
+    headers: {
+      // Realistic desktop UA helps avoid anti-bot fallbacks
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'accept-language': 'en-US,en;q=0.9',
+      'cache-control': 'no-cache',
+      'pragma': 'no-cache',
+    }
+  });
   if(!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   const html = await res.text();
   const $ = cheerio.load(html);
+  const pageText = $.root().text();
+  // Lightweight diagnostics: don’t fail, just warn once per page
+  const hasHSRMarkers = /HSR All Warp Banner Dates List|Honkai Star Rail Warp Banner Dates/i.test(pageText);
+  if(!hasHSRMarkers){
+    console.warn('[fetchDoc] expected HSR markers not found; length=', html.length, 'url=', url);
+  }
   return { $, html };
 }
 
