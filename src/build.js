@@ -19,7 +19,7 @@ async function main() {
     ['ZZZ',  scrapeZZZ],
     ['GI',   scrapeGI],
     ['WUWA', scrapeWUWA],
-    ['GFL2',  scrapeGF2],
+    ['GFL2',  scrapeGFL2],
   ];
 
   const all = [];
