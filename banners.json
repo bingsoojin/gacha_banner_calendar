@@ -1,5 +1,165 @@
 [
   {
+    "game": "GF2",
+    "name": "Past Suomi",
+    "phase": "—",
+    "start": "2024-12-03T00:00:00Z",
+    "end": "2024-12-25T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Ullrid",
+    "phase": "—",
+    "start": "2024-12-03T00:00:00Z",
+    "end": "2024-12-25T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Makiatto",
+    "phase": "—",
+    "start": "2024-12-26T00:00:00Z",
+    "end": "2025-01-16T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Tololo",
+    "phase": "—",
+    "start": "2024-12-26T00:00:00Z",
+    "end": "2025-01-16T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Daiyan",
+    "phase": "—",
+    "start": "2025-01-16T00:00:00Z",
+    "end": "2025-02-06T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Mosin-Nagant",
+    "phase": "—",
+    "start": "2025-01-16T00:00:00Z",
+    "end": "2025-02-06T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Dushevnaya",
+    "phase": "—",
+    "start": "2025-02-06T00:00:00Z",
+    "end": "2025-02-26T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Suomi",
+    "phase": "—",
+    "start": "2025-02-06T00:00:00Z",
+    "end": "2025-02-26T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Centaureissi",
+    "phase": "—",
+    "start": "2025-02-27T00:00:00Z",
+    "end": "2025-03-19T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Ullrid",
+    "phase": "—",
+    "start": "2025-02-27T00:00:00Z",
+    "end": "2025-03-19T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Klukai",
+    "phase": "—",
+    "start": "2025-03-20T00:00:00Z",
+    "end": "2025-04-09T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Makiatto",
+    "phase": "—",
+    "start": "2025-03-20T00:00:00Z",
+    "end": "2025-04-09T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Zhaohui",
+    "phase": "—",
+    "start": "2025-06-12T00:00:00Z",
+    "end": "2025-07-02T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Klukai May",
+    "phase": "—",
+    "start": "2025-06-12T00:00:00Z",
+    "end": "2025-07-02T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Springfield",
+    "phase": "—",
+    "start": "2025-07-03T00:00:00Z",
+    "end": "2025-07-23T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Peri Mechty",
+    "phase": "—",
+    "start": "2025-07-03T00:00:00Z",
+    "end": "2025-07-23T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
     "game": "HSR",
     "name": "Indelible Coterie",
     "phase": "2",
@@ -62,6 +222,26 @@
     "end": "2025-08-14T23:59:59.999Z",
     "source": "https://game8.co/games/Wuthering-Waves/archives/453303",
     "notes": ""
+  },
+  {
+    "game": "GF2",
+    "name": "Now Live",
+    "phase": "—",
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-13T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "current"
+  },
+  {
+    "game": "GF2",
+    "name": "Qiuhua Vector",
+    "phase": "—",
+    "start": "2025-07-24T00:00:00Z",
+    "end": "2025-08-13T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "current"
   },
   {
     "game": "GI",
@@ -177,6 +357,26 @@
     "rerun": false
   },
   {
+    "game": "GF2",
+    "name": "Upcoming Nikketa",
+    "phase": "—",
+    "start": "2025-08-14T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Yoohee",
+    "phase": "—",
+    "start": "2025-08-14T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
     "game": "GI",
     "name": "Mualani",
     "phase": "—",
@@ -244,6 +444,26 @@
     "status": "next",
     "banner_type": "Light Cone",
     "rerun": false
+  },
+  {
+    "game": "GF2",
+    "name": "Upcoming Jiangyu",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Zhaohui",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
   },
   {
     "game": "HSR",
