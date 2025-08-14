@@ -161,23 +161,23 @@
   },
   {
     "game": "GF2",
-    "name": "Now Live",
+    "name": "Past Qiuhua",
     "phase": "—",
     "start": "2025-07-24T00:00:00Z",
     "end": "2025-08-13T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "GF2",
-    "name": "Qiuhua Vector",
+    "name": "Vector",
     "phase": "—",
     "start": "2025-07-24T00:00:00Z",
     "end": "2025-08-13T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "ZZZ",
@@ -253,23 +253,23 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Nikketa",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-08-14T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Yoohee",
+    "name": "Nikketa Yoohee",
     "phase": "—",
     "start": "2025-08-14T00:00:00Z",
     "end": "2025-09-03T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "HSR",
@@ -315,6 +315,26 @@
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Upcoming Unknown",
+    "phase": "—",
+    "start": "2025-09-25T00:00:00Z",
+    "end": "2025-10-14T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Springfield",
+    "phase": "—",
+    "start": "2025-09-25T00:00:00Z",
+    "end": "2025-10-14T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
