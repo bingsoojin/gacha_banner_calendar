@@ -300,6 +300,39 @@
     "rerun": false
   },
   {
+    "game": "ZZZ",
+    "name": "Banner Character Guide Upcoming Banners in ZZZNew Banners in 2.2 Seed",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Trigger",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 1 W-Engine Banners",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
     "game": "GF2",
     "name": "Upcoming Jiangyu",
     "phase": "—",
@@ -318,6 +351,39 @@
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
+  },
+  {
+    "game": "ZZZ",
+    "name": "Orphie and Magus",
+    "phase": "—",
+    "start": "2025-09-24T00:00:00Z",
+    "end": "2025-10-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Evelyn",
+    "phase": "—",
+    "start": "2025-09-24T00:00:00Z",
+    "end": "2025-10-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 2 W-Engine Banners",
+    "phase": "—",
+    "start": "2025-09-24T00:00:00Z",
+    "end": "2025-10-14T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
   },
   {
     "game": "GF2",
