@@ -180,70 +180,6 @@
     "status": "past"
   },
   {
-    "game": "ZZZ",
-    "name": "Alice",
-    "phase": "—",
-    "start": "2025-08-06T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Dazzling Choir",
-    "phase": "—",
-    "start": "2025-08-06T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Yanagi",
-    "phase": "—",
-    "start": "2025-08-06T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Dazzling Melody",
-    "phase": "—",
-    "start": "2025-08-06T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "GF2",
-    "name": "Now Live",
-    "phase": "—",
-    "start": "2025-08-14T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://gfl2exilium.help/en/banners",
-    "notes": "Global section (GFL2 Help)",
-    "status": "current"
-  },
-  {
-    "game": "GF2",
-    "name": "Nikketa Yoohee",
-    "phase": "—",
-    "start": "2025-08-14T00:00:00Z",
-    "end": "2025-09-03T23:59:59.999Z",
-    "source": "https://gfl2exilium.help/en/banners",
-    "notes": "Global section (GFL2 Help)",
-    "status": "current"
-  },
-  {
     "game": "HSR",
     "name": "Cerydra",
     "phase": "2",
@@ -273,7 +209,18 @@
   },
   {
     "game": "ZZZ",
-    "name": "Banner Character Guide Upcoming Banners in ZZZNew Banners in 2.2 Seed",
+    "name": "Seed",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Dissonant Sonata",
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
@@ -295,7 +242,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "Phase 1 W-Engine Banners",
+    "name": "Vibrant Resonance",
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
@@ -306,27 +253,27 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Belka",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Andoris Zhaohui",
+    "name": "Belka Andoris",
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "ZZZ",
-    "name": "Orphie and Magus",
+    "name": "Character Guide Upcoming Banners in ZZZNew Banners in 2.2 Orphie and Magus",
     "phase": "—",
     "start": "2025-09-24T00:00:00Z",
     "end": "2025-10-14T23:59:59.999Z",
