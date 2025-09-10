@@ -272,6 +272,16 @@
     "status": "current"
   },
   {
+    "game": "GI",
+    "name": "Sumeru Chronicled",
+    "phase": "—",
+    "start": "2025-09-10T05:00:00Z",
+    "end": "2025-10-01T04:59:59.999Z",
+    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
+    "notes": "UTC-5 per server schedules",
+    "rerun": false
+  },
+  {
     "game": "ZZZ",
     "name": "Character Guide Upcoming Banners in ZZZNew Banners in 2.2 Orphie and Magus",
     "phase": "—",
@@ -309,7 +319,7 @@
     "name": "Upcoming Jiangyu",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
-    "end": "2025-10-14T23:59:59.999Z",
+    "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
@@ -319,7 +329,7 @@
     "name": "Springfield",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
-    "end": "2025-10-14T23:59:59.999Z",
+    "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
