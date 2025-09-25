@@ -181,23 +181,43 @@
   },
   {
     "game": "GF2",
-    "name": "Now Live",
+    "name": "Past Nikketa",
     "phase": "—",
-    "start": "2025-09-04T00:00:00Z",
-    "end": "2025-09-24T23:59:59.999Z",
+    "start": "2025-08-14T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "GF2",
-    "name": "Belka Andoris",
+    "name": "Yoohee",
+    "phase": "—",
+    "start": "2025-08-14T00:00:00Z",
+    "end": "2025-09-03T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Past Belka",
     "phase": "—",
     "start": "2025-09-04T00:00:00Z",
     "end": "2025-09-24T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
+  },
+  {
+    "game": "GF2",
+    "name": "Andoris Zhaohui",
+    "phase": "—",
+    "start": "2025-09-04T00:00:00Z",
+    "end": "2025-09-24T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "past"
   },
   {
     "game": "GI",
@@ -269,23 +289,23 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Jiangyu",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
     "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Springfield",
+    "name": "Jiangyu Springfield",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
     "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "HSR",
