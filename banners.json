@@ -308,6 +308,39 @@
     "status": "current"
   },
   {
+    "game": "ZZZ",
+    "name": "Banner Character Guide Upcoming Banners in ZZZNew Banners in 2.3 Lucia",
+    "phase": "—",
+    "start": "2025-10-15T00:00:00Z",
+    "end": "2025-11-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Vivian",
+    "phase": "—",
+    "start": "2025-10-15T00:00:00Z",
+    "end": "2025-11-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 1 W-Engine Banners",
+    "phase": "—",
+    "start": "2025-10-15T00:00:00Z",
+    "end": "2025-11-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
     "game": "HSR",
     "name": "Anaxa",
     "phase": "1",
@@ -333,6 +366,39 @@
     "phase_num": 2,
     "status": "next",
     "banner_type": "Character",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Yidhari",
+    "phase": "—",
+    "start": "2025-11-05T00:00:00Z",
+    "end": "2025-11-25T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Ju Fufu",
+    "phase": "—",
+    "start": "2025-11-05T00:00:00Z",
+    "end": "2025-11-25T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 2 W-Engine Banners",
+    "phase": "—",
+    "start": "2025-11-05T00:00:00Z",
+    "end": "2025-11-25T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
     "rerun": false
   }
 ]
