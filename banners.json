@@ -355,6 +355,26 @@
     "rerun": false
   },
   {
+    "game": "GF2",
+    "name": "Upcoming Unknown",
+    "phase": "—",
+    "start": "2025-10-16T00:00:00Z",
+    "end": "2025-11-05T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Peri",
+    "phase": "—",
+    "start": "2025-10-16T00:00:00Z",
+    "end": "2025-11-05T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
     "game": "HSR",
     "name": "Cyrene",
     "phase": "2",
