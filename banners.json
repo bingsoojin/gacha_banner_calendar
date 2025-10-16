@@ -231,23 +231,23 @@
   },
   {
     "game": "GF2",
-    "name": "Now Live",
+    "name": "Past Jiangyu",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
     "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "GF2",
-    "name": "Jiangyu Springfield",
+    "name": "Springfield",
     "phase": "—",
     "start": "2025-09-25T00:00:00Z",
     "end": "2025-10-15T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "ZZZ",
@@ -309,23 +309,23 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Florence",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-10-16T00:00:00Z",
     "end": "2025-11-05T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Qiuhua",
+    "name": "Florence Qiuhua",
     "phase": "—",
     "start": "2025-10-16T00:00:00Z",
     "end": "2025-11-05T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "HSR",
