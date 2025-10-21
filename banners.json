@@ -413,5 +413,16 @@
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "upcoming"
+  },
+  {
+    "game": "HSR",
+    "name": "The Dahlia",
+    "phase": "—",
+    "start": "2025-12-16T05:00:00Z",
+    "end": "2026-01-08T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per Game8",
+    "banner_type": "Character",
+    "rerun": false
   }
 ]
