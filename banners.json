@@ -220,16 +220,6 @@
     "status": "past"
   },
   {
-    "game": "GI",
-    "name": "Sumeru Chronicled",
-    "phase": "—",
-    "start": "2025-09-10T05:00:00Z",
-    "end": "2025-10-01T04:59:59.999Z",
-    "source": "https://game8.co/games/Genshin-Impact/archives/305012",
-    "notes": "UTC-5 per server schedules",
-    "rerun": false
-  },
-  {
     "game": "GF2",
     "name": "Past Jiangyu",
     "phase": "—",
