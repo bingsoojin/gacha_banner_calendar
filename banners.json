@@ -361,7 +361,7 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Unknown",
+    "name": "Upcoming Leva",
     "phase": "—",
     "start": "2025-11-27T00:00:00Z",
     "end": "2025-12-17T23:59:59.999Z",
@@ -371,7 +371,7 @@
   },
   {
     "game": "GF2",
-    "name": "Belka",
+    "name": "Lenna Belka",
     "phase": "—",
     "start": "2025-11-27T00:00:00Z",
     "end": "2025-12-17T23:59:59.999Z",
@@ -425,5 +425,25 @@
     "notes": "Schedule block on Game8",
     "banner_type": "Agent",
     "rerun": false
+  },
+  {
+    "game": "GF2",
+    "name": "Upcoming Robella",
+    "phase": "—",
+    "start": "2025-12-18T00:00:00Z",
+    "end": "2025-01-07T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Andoris",
+    "phase": "—",
+    "start": "2025-12-18T00:00:00Z",
+    "end": "2025-01-07T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
   }
 ]
