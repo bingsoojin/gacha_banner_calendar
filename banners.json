@@ -307,26 +307,6 @@
     "rerun": false
   },
   {
-    "game": "GF2",
-    "name": "Now Live",
-    "phase": "—",
-    "start": "2025-11-06T00:00:00Z",
-    "end": "2025-11-26T23:59:59.999Z",
-    "source": "https://gfl2exilium.help/en/banners",
-    "notes": "Global section (GFL2 Help)",
-    "status": "current"
-  },
-  {
-    "game": "GF2",
-    "name": "Lind Nikketa",
-    "phase": "—",
-    "start": "2025-11-06T00:00:00Z",
-    "end": "2025-11-26T23:59:59.999Z",
-    "source": "https://gfl2exilium.help/en/banners",
-    "notes": "Global section (GFL2 Help)",
-    "status": "current"
-  },
-  {
     "game": "ZZZ",
     "name": "Standard Banner Character Guide Upcoming BannersZZZ Next Banners Dialyn",
     "phase": "—",
@@ -371,7 +351,7 @@
   },
   {
     "game": "GF2",
-    "name": "Lenna Belka",
+    "name": "Lenna Andoris",
     "phase": "—",
     "start": "2025-11-27T00:00:00Z",
     "end": "2025-12-17T23:59:59.999Z",
@@ -438,7 +418,7 @@
   },
   {
     "game": "GF2",
-    "name": "Andoris",
+    "name": "Unknown Unknown",
     "phase": "—",
     "start": "2025-12-18T00:00:00Z",
     "end": "2025-01-07T23:59:59.999Z",
