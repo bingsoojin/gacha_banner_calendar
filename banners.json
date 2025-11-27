@@ -262,13 +262,13 @@
   {
     "game": "HSR",
     "name": "Cyrene",
-    "phase": "1",
+    "phase": "2",
     "start": "2025-11-04T05:00:00Z",
     "end": "2025-12-17T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
     "version": "3.7",
-    "phase_num": 1,
+    "phase_num": 2,
     "status": "current",
     "banner_type": "Character",
     "rerun": false
@@ -308,23 +308,23 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Leva",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-11-27T00:00:00Z",
     "end": "2025-12-17T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Lenna Andoris",
+    "name": "Leva Lenna",
     "phase": "—",
     "start": "2025-11-27T00:00:00Z",
     "end": "2025-12-17T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "HSR",
@@ -336,7 +336,7 @@
     "notes": "UTC-5 per Game8",
     "version": "3.7",
     "phase_num": 2,
-    "status": "next",
+    "status": "current",
     "banner_type": "Character",
     "rerun": false
   },
