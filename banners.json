@@ -260,53 +260,6 @@
     "status": "past"
   },
   {
-    "game": "HSR",
-    "name": "Cyrene",
-    "phase": "2",
-    "start": "2025-11-04T05:00:00Z",
-    "end": "2025-12-17T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.7",
-    "phase_num": 2,
-    "status": "current",
-    "banner_type": "Character",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Dialyn",
-    "phase": "—",
-    "start": "2025-11-26T00:00:00Z",
-    "end": "2025-12-17T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Hugo",
-    "phase": "—",
-    "start": "2025-11-26T00:00:00Z",
-    "end": "2025-12-17T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Phase 1 W-Engine Banners",
-    "phase": "—",
-    "start": "2025-11-26T00:00:00Z",
-    "end": "2025-12-17T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
     "game": "GF2",
     "name": "Now Live",
     "phase": "—",
@@ -334,9 +287,9 @@
     "end": "2026-01-08T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "3.7",
+    "version": "3.8",
     "phase_num": 2,
-    "status": "current",
+    "status": "next",
     "banner_type": "Character",
     "rerun": false
   },
@@ -348,9 +301,9 @@
     "end": "2026-01-08T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "3.7",
+    "version": "3.8",
     "phase_num": 2,
-    "status": "current",
+    "status": "next",
     "banner_type": "Character",
     "rerun": true
   },
@@ -408,6 +361,39 @@
     "status": "upcoming"
   },
   {
+    "game": "ZZZ",
+    "name": "Best Standard Banner Character Guide Upcoming BannersZZZ Next Banners Zhao",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-01-21T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "SRANKRERUN1",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-01-21T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 1 W-Engine Banners",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-01-21T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
     "game": "HSR",
     "name": "Fugue",
     "phase": "2",
@@ -434,6 +420,39 @@
     "status": "next",
     "banner_type": "Character",
     "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Ye Shunguang",
+    "phase": "—",
+    "start": "2026-01-21T00:00:00Z",
+    "end": "2026-02-17T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "SRANKRERUN2",
+    "phase": "—",
+    "start": "2026-01-21T00:00:00Z",
+    "end": "2026-02-17T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 2 W-Engine Banners",
+    "phase": "—",
+    "start": "2026-01-21T00:00:00Z",
+    "end": "2026-02-17T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
   },
   {
     "game": "HSR",
