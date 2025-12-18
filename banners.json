@@ -261,23 +261,23 @@
   },
   {
     "game": "GF2",
-    "name": "Now Live",
+    "name": "Past Lind",
     "phase": "—",
-    "start": "2025-11-27T00:00:00Z",
-    "end": "2025-12-17T23:59:59.999Z",
+    "start": "2025-11-06T00:00:00Z",
+    "end": "2025-11-26T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "GF2",
-    "name": "Leva Lenna",
+    "name": "Nikketa",
     "phase": "—",
-    "start": "2025-11-27T00:00:00Z",
-    "end": "2025-12-17T23:59:59.999Z",
+    "start": "2025-11-06T00:00:00Z",
+    "end": "2025-11-26T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "current"
+    "status": "past"
   },
   {
     "game": "HSR",
@@ -342,23 +342,23 @@
   },
   {
     "game": "GF2",
-    "name": "Upcoming Robella",
+    "name": "Now Live",
     "phase": "—",
     "start": "2025-12-18T00:00:00Z",
-    "end": "2025-01-07T23:59:59.999Z",
+    "end": "2026-01-07T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "GF2",
-    "name": "Belka Jiangyu",
+    "name": "Robella Belka",
     "phase": "—",
     "start": "2025-12-18T00:00:00Z",
-    "end": "2025-01-07T23:59:59.999Z",
+    "end": "2026-01-07T23:59:59.999Z",
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
-    "status": "upcoming"
+    "status": "current"
   },
   {
     "game": "ZZZ",
