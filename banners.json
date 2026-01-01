@@ -308,39 +308,6 @@
     "rerun": true
   },
   {
-    "game": "ZZZ",
-    "name": "Banyue",
-    "phase": "—",
-    "start": "2025-12-17T00:00:00Z",
-    "end": "2025-12-29T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Ellen",
-    "phase": "—",
-    "start": "2025-12-17T00:00:00Z",
-    "end": "2025-12-29T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Phase 2 W-Engine Banners",
-    "phase": "—",
-    "start": "2025-12-17T00:00:00Z",
-    "end": "2025-12-29T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
     "game": "GF2",
     "name": "Now Live",
     "phase": "—",
@@ -359,6 +326,39 @@
     "source": "https://gfl2exilium.help/en/banners",
     "notes": "Global section (GFL2 Help)",
     "status": "current"
+  },
+  {
+    "game": "ZZZ",
+    "name": "Ye Shunguang",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-02-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Zhao",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-02-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Debut W-Engine Banners",
+    "phase": "—",
+    "start": "2025-12-30T00:00:00Z",
+    "end": "2026-02-05T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
   },
   {
     "game": "HSR",
