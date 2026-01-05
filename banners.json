@@ -389,6 +389,26 @@
     "rerun": true
   },
   {
+    "game": "GF2",
+    "name": "Upcoming Lewis",
+    "phase": "—",
+    "start": "2026-01-08T00:00:00Z",
+    "end": "2026-01-28T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
+    "game": "GF2",
+    "name": "Florence Peri",
+    "phase": "—",
+    "start": "2026-01-08T00:00:00Z",
+    "end": "2026-01-28T23:59:59.999Z",
+    "source": "https://gfl2exilium.help/en/banners",
+    "notes": "Global section (GFL2 Help)",
+    "status": "upcoming"
+  },
+  {
     "game": "HSR",
     "name": "Aglaea",
     "phase": "2",
@@ -415,5 +435,33 @@
     "status": "next",
     "banner_type": "Character",
     "rerun": true
+  },
+  {
+    "game": "HSR",
+    "name": "Yao Guang",
+    "phase": "3",
+    "start": "2026-02-12T05:00:00Z",
+    "end": "2026-03-07T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per Game8",
+    "version": "3.8",
+    "phase_num": 3,
+    "status": "next",
+    "banner_type": "Character",
+    "rerun": false
+  },
+  {
+    "game": "HSR",
+    "name": "Sparxie",
+    "phase": "1",
+    "start": "2026-03-06T05:00:00Z",
+    "end": "2026-03-27T04:59:59.999Z",
+    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
+    "notes": "UTC-5 per Game8",
+    "version": "4.0",
+    "phase_num": 1,
+    "status": "upcoming",
+    "banner_type": "Character",
+    "rerun": false
   }
 ]
