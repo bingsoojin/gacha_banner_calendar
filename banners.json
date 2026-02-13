@@ -1,33 +1,5 @@
 [
   {
-    "game": "HSR",
-    "name": "Aglaea",
-    "phase": "3",
-    "start": "2026-01-28T05:00:00Z",
-    "end": "2026-02-13T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.8",
-    "phase_num": 3,
-    "status": "current",
-    "banner_type": "Character",
-    "rerun": true
-  },
-  {
-    "game": "HSR",
-    "name": "Sunday",
-    "phase": "3",
-    "start": "2026-01-28T05:00:00Z",
-    "end": "2026-02-13T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "3.8",
-    "phase_num": 3,
-    "status": "current",
-    "banner_type": "Character",
-    "rerun": true
-  },
-  {
     "game": "ZZZ",
     "name": "Sunna",
     "phase": "—",
@@ -63,13 +35,13 @@
   {
     "game": "HSR",
     "name": "Yao Guang",
-    "phase": "3",
+    "phase": "1",
     "start": "2026-02-12T05:00:00Z",
     "end": "2026-03-25T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "3.8",
-    "phase_num": 3,
+    "version": "4.0",
+    "phase_num": 1,
     "status": "current",
     "banner_type": "Character",
     "rerun": false
@@ -84,7 +56,7 @@
     "notes": "UTC-5 per Game8",
     "version": "4.0",
     "phase_num": 1,
-    "status": "next",
+    "status": "current",
     "banner_type": "Character",
     "rerun": false
   },
@@ -124,14 +96,14 @@
   {
     "game": "HSR",
     "name": "Ashveil",
-    "phase": "1",
-    "start": "2026-03-25T05:00:00Z",
-    "end": "2026-04-23T04:59:59.999Z",
+    "phase": "2",
+    "start": "2026-03-24T05:00:00Z",
+    "end": "2026-04-22T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
-    "version": "4.1",
-    "phase_num": 1,
-    "status": "upcoming",
+    "version": "4.0",
+    "phase_num": 2,
+    "status": "next",
     "banner_type": "Character",
     "rerun": false
   }
