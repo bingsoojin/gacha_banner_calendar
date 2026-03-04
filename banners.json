@@ -1,38 +1,5 @@
 [
   {
-    "game": "ZZZ",
-    "name": "Sunna",
-    "phase": "—",
-    "start": "2026-02-06T00:00:00Z",
-    "end": "2026-03-04T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Yixuan",
-    "phase": "—",
-    "start": "2026-02-06T00:00:00Z",
-    "end": "2026-03-04T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Phase 1 W-Engine Banners",
-    "phase": "—",
-    "start": "2026-02-06T00:00:00Z",
-    "end": "2026-03-04T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
     "game": "HSR",
     "name": "Yao Guang",
     "phase": "2",
@@ -62,7 +29,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "S-Rank Agent. Best Standard Banner Character Guide Upcoming Banners Aria",
+    "name": "Aria",
     "phase": "—",
     "start": "2026-03-04T00:00:00Z",
     "end": "2026-03-23T23:59:59.999Z",
