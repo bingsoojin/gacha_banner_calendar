@@ -35,41 +35,27 @@
   {
     "game": "HSR",
     "name": "Ashveil",
-    "phase": "1",
+    "phase": "2",
     "start": "2026-03-24T05:00:00Z",
     "end": "2026-04-22T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
     "version": "4.1",
-    "phase_num": 1,
+    "phase_num": 2,
     "status": "current",
     "banner_type": "Character",
     "rerun": false
   },
   {
     "game": "HSR",
-    "name": "Hyacine",
-    "phase": "1",
-    "start": "2026-03-24T05:00:00Z",
-    "end": "2026-04-09T04:59:59.999Z",
-    "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
-    "notes": "UTC-5 per Game8",
-    "version": "4.1",
-    "phase_num": 1,
-    "status": "current",
-    "banner_type": "Character",
-    "rerun": true
-  },
-  {
-    "game": "HSR",
     "name": "Boothill",
-    "phase": "1",
+    "phase": "2",
     "start": "2026-04-08T05:00:00Z",
     "end": "2026-04-22T04:59:59.999Z",
     "source": "https://game8.co/games/Honkai-Star-Rail/archives/408381",
     "notes": "UTC-5 per Game8",
     "version": "4.1",
-    "phase_num": 1,
+    "phase_num": 2,
     "status": "current",
     "banner_type": "Character",
     "rerun": true
@@ -117,7 +103,7 @@
     "notes": "UTC-5 per Game8",
     "version": "4.1",
     "phase_num": 2,
-    "status": "next",
+    "status": "current",
     "banner_type": "Character",
     "rerun": false
   },
@@ -131,7 +117,7 @@
     "notes": "UTC-5 per Game8",
     "version": "4.2",
     "phase_num": 1,
-    "status": "upcoming",
+    "status": "next",
     "banner_type": "Character",
     "rerun": false
   },
@@ -145,7 +131,7 @@
     "notes": "UTC-5 per Game8",
     "version": "4.2",
     "phase_num": 2,
-    "status": "upcoming",
+    "status": "next",
     "banner_type": "Character",
     "rerun": false
   }
