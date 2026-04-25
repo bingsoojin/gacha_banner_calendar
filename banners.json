@@ -47,6 +47,39 @@
     "rerun": false
   },
   {
+    "game": "ZZZ",
+    "name": "Banner Character Guide Upcoming BannersZZZ Next Banner Schedule Promeia",
+    "phase": "—",
+    "start": "2026-05-06T00:00:00Z",
+    "end": "2026-05-27T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Lucia",
+    "phase": "—",
+    "start": "2026-05-06T00:00:00Z",
+    "end": "2026-05-27T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 1 W-Engine Banners",
+    "phase": "—",
+    "start": "2026-05-06T00:00:00Z",
+    "end": "2026-05-27T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
     "game": "HSR",
     "name": "Evanescia",
     "phase": "1",
@@ -58,6 +91,39 @@
     "phase_num": 1,
     "status": "current",
     "banner_type": "Character",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Starlight Billy",
+    "phase": "—",
+    "start": "2026-05-27T00:00:00Z",
+    "end": "2026-06-16T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": false
+  },
+  {
+    "game": "ZZZ",
+    "name": "Orphie and Magus",
+    "phase": "—",
+    "start": "2026-05-27T00:00:00Z",
+    "end": "2026-06-16T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
+    "rerun": true
+  },
+  {
+    "game": "ZZZ",
+    "name": "Phase 2 W-Engine Banners",
+    "phase": "—",
+    "start": "2026-05-27T00:00:00Z",
+    "end": "2026-06-16T23:59:59.999Z",
+    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
+    "notes": "Schedule block on Game8",
+    "banner_type": "Agent",
     "rerun": false
   },
   {
