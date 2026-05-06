@@ -1,38 +1,5 @@
 [
   {
-    "game": "ZZZ",
-    "name": "Cissia Yu",
-    "phase": "—",
-    "start": "2026-04-15T00:00:00Z",
-    "end": "2026-05-05T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Seed",
-    "phase": "—",
-    "start": "2026-04-15T00:00:00Z",
-    "end": "2026-05-05T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Phase 2 W-Engine Banners",
-    "phase": "—",
-    "start": "2026-04-15T00:00:00Z",
-    "end": "2026-05-05T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
     "game": "HSR",
     "name": "Silver Wolf Lv.999",
     "phase": "1",
@@ -48,7 +15,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "Banner Character Guide Upcoming BannersZZZ Next Banner Schedule Promeia",
+    "name": "Promeia",
     "phase": "—",
     "start": "2026-05-06T00:00:00Z",
     "end": "2026-05-27T23:59:59.999Z",
@@ -95,7 +62,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "Starlight Billy",
+    "name": "Character Guide Upcoming BannersZZZ Next Banner Schedule Starlight Billy",
     "phase": "—",
     "start": "2026-05-27T00:00:00Z",
     "end": "2026-06-16T23:59:59.999Z",
