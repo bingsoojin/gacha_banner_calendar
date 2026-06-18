@@ -1,38 +1,5 @@
 [
   {
-    "game": "ZZZ",
-    "name": "Starlight Billy",
-    "phase": "—",
-    "start": "2026-05-27T00:00:00Z",
-    "end": "2026-06-16T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
-    "game": "ZZZ",
-    "name": "Orphie and Magus",
-    "phase": "—",
-    "start": "2026-05-27T00:00:00Z",
-    "end": "2026-06-16T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": true
-  },
-  {
-    "game": "ZZZ",
-    "name": "Phase 2 W-Engine Banners",
-    "phase": "—",
-    "start": "2026-05-27T00:00:00Z",
-    "end": "2026-06-16T23:59:59.999Z",
-    "source": "https://game8.co/games/Zenless-Zone-Zero/archives/435687",
-    "notes": "Schedule block on Game8",
-    "banner_type": "Agent",
-    "rerun": false
-  },
-  {
     "game": "HSR",
     "name": "Mortenax Blade",
     "phase": "1",
@@ -62,7 +29,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "Character Guide Upcoming Banners in ZZZZZZ Next Banner Schedule Velina",
+    "name": "Velina",
     "phase": "—",
     "start": "2026-06-17T00:00:00Z",
     "end": "2026-07-08T23:59:59.999Z",
@@ -123,7 +90,7 @@
   },
   {
     "game": "ZZZ",
-    "name": "Norma",
+    "name": "Character Guide Upcoming Banners in ZZZZZZ Next Banner Schedule Norma",
     "phase": "—",
     "start": "2026-07-08T00:00:00Z",
     "end": "2026-07-28T23:59:59.999Z",
